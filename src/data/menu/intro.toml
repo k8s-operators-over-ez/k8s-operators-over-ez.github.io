@@ -1,0 +1,41 @@
+# I. Introduction
+
+[[intro]]
+    identifier = "intro"
+    name = "Introduction"
+    weight = 0   
+    ref = "/introduction"
+
+[[intro.sub]]
+    parent = "intro"
+    name = "The Problem"
+    weight = 0  
+    ref = "/introduction/#the-problem"
+
+[[intro.sub]]
+    parent = "intro"
+    name = "What's an Operator?"
+    weight = 0  
+    ref = "/introduction/#whats-an-operator"
+
+[[intro.sub]]
+    parent = "intro"
+    name = "How do Operators Work?"
+    weight = 0
+    ref = "/introduction/#how-do-operators-work"  
+
+[[intro.sub]]
+    parent = "intro"
+    name = "Types of Operators"
+    weight = 0
+    ref = "/introduction/#types-of-operators"  
+
+[[intro]]
+    name = "Resources"
+    weight = 0
+    ref = "/introduction/resources.md"   
+
+[[intro]]
+    name = "Lab Requirements"
+    weight = 0
+    ref = "/introduction/lab-requirements.md"   

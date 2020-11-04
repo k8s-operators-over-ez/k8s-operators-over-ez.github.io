@@ -1,0 +1,54 @@
+<nav>
+    {{ partial "search" . }}
+
+    <sectio class="gdoc-nav--main">
+        {{ if .Site.Data.menu.intro.intro }}
+            <h2>I. Introduction</h2>
+            {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.intro.intro) }}
+        {{ end }}
+    </section>
+
+    <section class="gdoc-nav--main">
+        {{ if .Site.Data.menu.golang.golang }}
+            <h2>II. Golang Operators</h2>
+            {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.golang.golang) }}
+        {{ end }}
+    </section>
+
+    <section class="gdoc-nav--main">
+        {{ if .Site.Data.menu.ansible.ansible }}
+            <h2>III. Ansible Operators</h2>
+            {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.ansible.ansible) }}
+        {{ end }}
+    </section>
+
+    <section class="gdoc-nav--main">
+        {{ if .Site.Data.menu.helm.helm }}
+            <h2>IV. Helm Operators</h2>
+            {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.helm.helm) }}
+        {{ end }}
+    </section>
+
+    <section class="gdoc-nav--main">
+        {{ if .Site.Data.menu.alt.alt }}
+            <h2>V. Alternative Operators</h2>
+            {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.alt.alt) }}
+        {{ end }}
+    </section>
+
+    <!-- <section class="gdoc-nav--main">
+        <h2>Navigation</h2>
+        {{ if .Site.Params.GeekdocMenuBundle }}
+            {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.main.main) }}
+        {{ else }}
+            {{ partial "menu-filetree" . }}
+        {{ end }}
+    </section>  -->
+
+    <!-- <section class="gdoc-nav--more">
+        {{ if .Site.Data.menu.more.more }}
+            <h2>More</h2>
+            {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.more.more) }}
+        {{ end }}
+    </section> -->
+</nav>

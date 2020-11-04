@@ -33,7 +33,7 @@
 
 [[golang]]
     identifier = "golang-ops-lab"
-    name = "A Golang Operator Lab - Over Easy"
+    name = "Golang Operator Lab"
     weight = 0   
     ref = "/golang/lab"
 

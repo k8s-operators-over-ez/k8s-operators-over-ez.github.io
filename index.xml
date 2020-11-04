@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>K8S Operators Over EZ</title>
+    <link>http://localhost/</link>
+    <description>Recent content on K8S Operators Over EZ</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="http://localhost/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>http://localhost/introduction/lab-requirements/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/introduction/lab-requirements/</guid>
+      <description>To run the labs and scripts in this guide, you will need the following:
+ An accessible kubernetes cluster with sufficient privileges kubectl kubectx/kubens operator-sdk &amp;gt;= 1.0.0 kustomize golang make - build uitlity a shell environment (i.e. bash, zsh) a text editor  Ensure that all of the above CLI executables are availabe in your PATH environment variable.
+K8S Development Cluster Suggestions If you do not have access to a cluster, there are options to allow you to run a cluster locally:</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/introduction/resources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/introduction/resources/</guid>
+      <description>Learn more about Operators  https://kubernetes.io/docs/concepts/extend-kubernetes/operator/ https://enterprisersproject.com/article/2019/2/kubernetes-operators-plain-english https://coreos.com/blog/introducing-operators.html https://www.openshift.com/blog/operator-framework-moves-to-cncf-for-incubation https://www.openshift.com/blog/kubernetes-operators-best-practices https://www.youtube.com/watch?v=8_DaCcRMp5I&amp;amp;t=3453s https://www.twitch.tv/videos/680494909  Frameworks to Help you Create Operators (Not an Exhaustive List)  https://sdk.operatorframework.io/build/ https://kudo.dev/ https://book.kubebuilder.io/ https://github.com/kubernetes-sigs/kubebuilder https://github.com/metacontroller/metacontroller https://github.com/zalando-incubator/kopf https://github.com/ContainerSolutions/java-operator-sdk    </description>
+    </item>
+    
+    <item>
+      <title>Debugging Golang Operators</title>
+      <link>http://localhost/golang/debugging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/golang/debugging/</guid>
+      <description>Development Environments The following are prescribed options that you may choose to follow. There is no hard requirement to setup your environment as prescribed.
+Debugging GoLang Operators with Visual Studio Code  Open this code at the root of the lab code directory (docs/02/labs/000/code) with Visual Studio Code. Install necessary VS Code plugins/extensions for Go: https://github.com/golang/vscode-go#getting-started Follow directions for debugging: https://github.com/golang/vscode-go/blob/master/docs/debugging.md#set-up  To debug Unit tests:
+ Set break points Select the file suite_test.</description>
+    </item>
+    
+  </channel>
+</rss>

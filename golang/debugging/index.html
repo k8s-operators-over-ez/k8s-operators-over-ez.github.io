@@ -2,18 +2,16 @@
 <html lang="en">
 
 <head>
-	<meta name="generator" content="Hugo 0.75.1" />
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="Debugging Golang Operators">
 
-<title> | K8S Operators Over EZ</title>
+<title>Debugging Golang Operators | K8S Operators Over EZ</title>
 
 <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 <link rel="stylesheet" href="/main.min.css" media="screen">
 <link rel="stylesheet" href="/custom.css" media="screen">
 
-<link rel="alternate" type="application/rss+xml" href="http://localhost/index.xml" title="K8S Operators Over EZ" />
 <!--Made with Geekdoc theme https://github.com/xoxys/hugo-geekdoc-->
 
 </head>
@@ -709,7 +707,7 @@
             <span class="flex">
                 
                 <a href="/golang/debugging/"
-                    class="gdoc-nav__entry ">
+                    class="gdoc-nav__entry is-active">
                     Debugging Golang Operators
                 </a>
             </span>
@@ -883,8 +881,9 @@
     </span>
 </div>
 
+
     <article class="gdoc-markdown">
-        <h1></h1>
+        <h1>Debugging Golang Operators</h1>
         
 
 
@@ -892,15 +891,49 @@
     
 
 
-<h1 id="kubernetes-operators-done-over-easy">Kubernetes Operators Done Over-Easy</h1>
-<img src="/assets/overeasy.jpeg" width="450">
-<h1 id="how-to-contribute">How to Contribute</h1>
-<p>Did you want add something you didn&rsquo;t see here? (i.e. sample code, a lab write up, documentation additions, etc.)</p>
-<p>Did you find something that looked off?</p>
-<p>Here&rsquo;s what you can do:</p>
+<h1 id="development-environments">Development Environments</h1>
+<p>The following are prescribed options that you may choose to follow. There is no hard requirement to setup your environment as prescribed.</p>
+<h1 id="debugging-golang-operators-with-visual-studio-code">Debugging GoLang Operators with Visual Studio Code</h1>
+<ol>
+<li>Open this code at the root of the lab code directory (<code>docs/02/labs/000/code</code>) with Visual Studio Code.</li>
+<li>Install necessary VS Code plugins/extensions for Go:  <a href="https://github.com/golang/vscode-go#getting-started">https://github.com/golang/vscode-go#getting-started</a></li>
+<li>Follow directions for debugging: <a href="https://github.com/golang/vscode-go/blob/master/docs/debugging.md#set-up">https://github.com/golang/vscode-go/blob/master/docs/debugging.md#set-up</a></li>
+</ol>
+<p>To debug Unit tests:</p>
 <ul>
-<li>Create an issue in the repository</li>
-<li>Create pull-requests for review</li>
+<li>Set break points</li>
+<li>Select the file <code>suite_test.go</code> as your &ldquo;Run and Debug&rdquo; starting point</li>
+</ul>
+<p>To debug an operator instance:</p>
+<ul>
+<li>Set break points</li>
+<li>Select the file <code>main.go</code> as your &ldquo;Run and Debug&rdquo; starting point</li>
+<li>Create an instance of an operator: <code> k apply -f config/samples/operators-over-ez_v1alpha1_opsovereasy.yaml</code></li>
+</ul>
+<p>For this setup, you will not need a <code>launch.json</code> file.</p>
+<h1 id="debugging-golang-operators-with-jetbrains-intellijgoland">Debugging GoLang Operators with JetBrains Intellij/GoLand</h1>
+<ol>
+<li>Install Go plugins</li>
+<li>Create new project project and specify:</li>
+</ol>
+<ul>
+<li>Go</li>
+<li>Location: Root of the lab code directory (<code>docs/02/labs/000/code</code>)</li>
+<li>GOROOT: Specify or install one if necessary (i.e. Go 1.14.6)</li>
+<li>Check <code>Index entire GOPATH</code></li>
+<li>Click <code>Create</code></li>
+<li>Select <code>Create from existing sources</code></li>
+</ul>
+<p>To debug Unit tests:</p>
+<ul>
+<li>Set break points</li>
+<li>Right-click the file <code>suite_test.go</code> and select: <code>Debug 'suite_test.go'</code></li>
+</ul>
+<p>To debug an operator instance:</p>
+<ul>
+<li>Set break points</li>
+<li>Right-click the file <code>main.go</code> and select: <code>Debug 'main.go'</code></li>
+<li>Create an instance of an operator: <code> k apply -f config/samples/operators-over-ez_v1alpha1_opsovereasy.yaml</code></li>
 </ul>
 
 

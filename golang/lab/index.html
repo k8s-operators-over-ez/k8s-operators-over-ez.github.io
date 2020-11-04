@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Golang Operator Lab">
+
+<title>Golang Operator Lab | K8S Operators Over EZ</title>
+
+<link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
+<link rel="stylesheet" href="/main.min.css" media="screen">
+<link rel="stylesheet" href="/custom.css" media="screen">
+
+<link rel="alternate" type="application/rss+xml" href="http://localhost/golang/lab/index.xml" title="K8S Operators Over EZ" />
+<!--Made with Geekdoc theme https://github.com/xoxys/hugo-geekdoc-->
+
+</head>
+
+<body>
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><symbol viewBox="0 0 24 24" id="arrow_back" xmlns="http://www.w3.org/2000/svg"><path d="M20.016 11.016v1.969H7.828l5.578 5.625L12 20.016 3.984 12 12 3.984l1.406 1.406-5.578 5.625h12.188z"/></symbol><symbol viewBox="0 0 24 24" id="arrow_left_alt" xmlns="http://www.w3.org/2000/svg"><path d="M7.969 11.016v-3L3.985 12l3.984 3.984v-3h12.047v-1.969H7.969z"/></symbol><symbol viewBox="0 0 24 24" id="arrow_right_alt" xmlns="http://www.w3.org/2000/svg"><path d="M16.031 11.016v-3L20.015 12l-3.984 3.984v-3H3.984v-1.969h12.047z"/></symbol><symbol viewBox="0 0 24 24" id="bookmark" xmlns="http://www.w3.org/2000/svg"><path d="M15 5.016q.797 0 1.406.586t.609 1.383v16.031l-7.031-3-6.984 3V6.985q0-.797.609-1.383t1.406-.586h9.984zM18.984 18V5.016q0-.797-.586-1.406t-1.383-.609H6.984q0-.797.609-1.406T8.999.986h9.984q.797 0 1.406.609t.609 1.406v15.984z"/></symbol><symbol viewBox="0 0 16 28" id="code" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 23a1.5 1.5 0 10-3.001.001A1.5 1.5 0 004.5 23zm0-18a1.5 1.5 0 10-3.001.001A1.5 1.5 0 004.5 5zm10 2a1.5 1.5 0 10-3.001.001A1.5 1.5 0 0014.5 7zM16 7a3.002 3.002 0 01-1.5 2.594c-.047 5.641-4.047 6.891-6.703 7.734C5.313 18.109 4.5 18.484 4.5 20v.406A3 3 0 016 23a3.001 3.001 0 01-6 0c0-1.109.609-2.078 1.5-2.594V7.594A3 3 0 010 5a3.001 3.001 0 016 0 3.002 3.002 0 01-1.5 2.594v7.766c.797-.391 1.641-.656 2.406-.891 2.906-.922 4.562-1.609 4.594-4.875A3 3 0 0110 7a3.001 3.001 0 016 0z"/></symbol><symbol viewBox="0 0 24 24" id="date" xmlns="http://www.w3.org/2000/svg"><path d="M18.984 20.016V9H5.015v11.016h13.969zm0-16.032q.797 0 1.406.609t.609 1.406v14.016q0 .797-.609 1.383t-1.406.586H5.015q-.844 0-1.43-.563t-.586-1.406V5.999q0-.797.586-1.406t1.43-.609h.984V2.015h2.016v1.969h7.969V2.015H18v1.969h.984zm-1.968 7.032v1.969H15v-1.969h2.016zm-4.032 0v1.969h-1.969v-1.969h1.969zm-3.984 0v1.969H6.984v-1.969H9z"/></symbol><symbol viewBox="0 0 24 24" id="download" xmlns="http://www.w3.org/2000/svg"><path d="M5.016 18h13.969v2.016H5.016V18zm13.968-9L12 15.984 5.016 9H9V3h6v6h3.984z"/></symbol><symbol viewBox="0 0 24 24" id="email" xmlns="http://www.w3.org/2000/svg"><path d="M20.016 8.016V6L12 11.016 3.984 6v2.016L12 12.985zm0-4.032q.797 0 1.383.609t.586 1.406v12q0 .797-.586 1.406t-1.383.609H3.985q-.797 0-1.383-.609t-.586-1.406v-12q0-.797.586-1.406t1.383-.609h16.031z"/></symbol><symbol viewBox="0 0 24 28" id="github" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-.609.109-.828-.266-.828-.578 0-.391.016-1.687.016-3.297 0-1.125-.375-1.844-.812-2.219 2.672-.297 5.484-1.313 5.484-5.922 0-1.313-.469-2.375-1.234-3.219.125-.313.531-1.531-.125-3.187-1-.313-3.297 1.234-3.297 1.234a11.28 11.28 0 00-6 0S6.704 6.656 5.704 6.969c-.656 1.656-.25 2.875-.125 3.187-.766.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-.344.313-.656.844-.766 1.609-.688.313-2.438.844-3.484-1-.656-1.141-1.844-1.234-1.844-1.234-1.172-.016-.078.734-.078.734.781.359 1.328 1.75 1.328 1.75.703 2.141 4.047 1.422 4.047 1.422 0 1 .016 1.937.016 2.234 0 .313-.219.688-.828.578C3.439 23.796.002 19.296.002 13.999c0-6.625 5.375-12 12-12zM4.547 19.234c.031-.063-.016-.141-.109-.187-.094-.031-.172-.016-.203.031-.031.063.016.141.109.187.078.047.172.031.203-.031zm.484.532c.063-.047.047-.156-.031-.25-.078-.078-.187-.109-.25-.047-.063.047-.047.156.031.25.078.078.187.109.25.047zm.469.703c.078-.063.078-.187 0-.297-.063-.109-.187-.156-.266-.094-.078.047-.078.172 0 .281s.203.156.266.109zm.656.656c.063-.063.031-.203-.063-.297-.109-.109-.25-.125-.313-.047-.078.063-.047.203.063.297.109.109.25.125.313.047zm.891.391c.031-.094-.063-.203-.203-.25-.125-.031-.266.016-.297.109s.063.203.203.234c.125.047.266 0 .297-.094zm.984.078c0-.109-.125-.187-.266-.172-.141 0-.25.078-.25.172 0 .109.109.187.266.172.141 0 .25-.078.25-.172zm.906-.156c-.016-.094-.141-.156-.281-.141-.141.031-.234.125-.219.234.016.094.141.156.281.125s.234-.125.219-.219z"/></symbol><symbol viewBox="0 0 28 28" id="heart" xmlns="http://www.w3.org/2000/svg"><path d="M14 26c-.25 0-.5-.094-.688-.281l-9.75-9.406c-.125-.109-3.563-3.25-3.563-7C-.001 4.735 2.796 2 7.468 2c2.734 0 5.297 2.156 6.531 3.375C15.233 4.156 17.796 2 20.53 2c4.672 0 7.469 2.734 7.469 7.313 0 3.75-3.437 6.891-3.578 7.031l-9.734 9.375a.972.972 0 01-.688.281z"/></symbol><symbol viewBox="0 0 24 24" id="link" xmlns="http://www.w3.org/2000/svg"><path d="M17.016 6.984q2.063 0 3.516 1.477T21.985 12t-1.453 3.539-3.516 1.477h-4.031v-1.922h4.031q1.266 0 2.18-.914T20.11 12t-.914-2.18-2.18-.914h-4.031V6.984h4.031zm-9 6v-1.969h7.969v1.969H8.016zM3.891 12q0 1.266.914 2.18t2.18.914h4.031v1.922H6.985q-2.063 0-3.516-1.477T2.016 12t1.453-3.539 3.516-1.477h4.031v1.922H6.985q-1.266 0-2.18.914T3.891 12z"/></symbol><symbol viewBox="0 0 24 24" id="menu" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2.016H3V6zm0 6.984v-1.969h18v1.969H3zM3 18v-2.016h18V18H3z"/></symbol><symbol viewBox="0 0 24 24" id="notification" xmlns="http://www.w3.org/2000/svg"><path d="M18 15.984L20.016 18v.984H3.985V18l2.016-2.016v-4.969q0-2.344 1.195-4.078t3.305-2.25v-.703q0-.609.422-1.055t1.078-.445 1.078.445.422 1.055v.703q2.109.516 3.305 2.25t1.195 4.078v4.969zm-6 6q-.844 0-1.43-.563t-.586-1.406h4.031q0 .797-.609 1.383T12 21.984z"/></symbol><symbol viewBox="0 0 24 24" id="path" xmlns="http://www.w3.org/2000/svg"><path d="M21.984 11.016H15v-3h-2.016v7.969H15v-3h6.984v8.016H15v-3h-3.984V8.017H9v3H2.016V3.001H9v3h6v-3h6.984v8.016z"/></symbol><symbol viewBox="0 0 24 24" id="person" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.016q2.531 0 5.273 1.102t2.742 2.883v2.016H3.984v-2.016q0-1.781 2.742-2.883t5.273-1.102zM12 12q-1.641 0-2.813-1.172T8.015 8.015t1.172-2.836T12 3.984t2.813 1.195 1.172 2.836-1.172 2.813T12 12z"/></symbol><symbol viewBox="0 0 24 24" id="search" xmlns="http://www.w3.org/2000/svg"><path d="M9.516 14.016q1.875 0 3.188-1.313t1.313-3.188-1.313-3.188-3.188-1.313-3.188 1.313-1.313 3.188 1.313 3.188 3.188 1.313zm6 0l4.969 4.969-1.5 1.5-4.969-4.969v-.797l-.281-.281q-1.781 1.547-4.219 1.547-2.719 0-4.617-1.875T3.001 9.516t1.898-4.617 4.617-1.898 4.594 1.898 1.875 4.617q0 .984-.469 2.227t-1.078 1.992l.281.281h.797z"/></symbol><symbol viewBox="0 0 20 28" id="shield" xmlns="http://www.w3.org/2000/svg"><path d="M17 15V5h-7v17.766c.797-.422 2.078-1.156 3.328-2.141C15 19.312 17 17.266 17 15zm3-12v12c0 6.578-9.203 10.734-9.594 10.906-.125.063-.266.094-.406.094s-.281-.031-.406-.094C9.203 25.734 0 21.578 0 15V3c0-.547.453-1 1-1h18c.547 0 1 .453 1 1z"/></symbol><symbol viewBox="0 0 32 32" id="tags" xmlns="http://www.w3.org/2000/svg"><path d="M5 5c-1.104 0-2 .887-2 2v8l13.381 13.381c.716.716 1.838.78 2.62.191L5 14.5V5.007 5zm11-1l13.381 13.381c.783.783.787 2.051.008 2.831l-7.177 7.177a2.003 2.003 0 01-2.831-.008L6 14V6c0-1.112.895-2 2-2h8zm-4.5 7a1.5 1.5 0 10-.001-3.001A1.5 1.5 0 0011.5 11z"/></symbol><symbol viewBox="0 0 35 32" id="telescope" xmlns="http://www.w3.org/2000/svg"><path d="M27.464 2.314a.501.501 0 00-.698-.257L14.86 8.339a.499.499 0 00-.233.621l.245.641-6.873 3.769a.5.5 0 00-.222.63l.228.549-7.299 3.488a.5.5 0 00-.246.643l1.498 3.61a.5.5 0 00.629.28l7.625-2.701.228.549a.5.5 0 00.601.289l7.276-2.097.218.569a.497.497 0 00.612.299l13-4a.498.498 0 00.317-.663l-5-12.501zM2.7 21.469l-1.134-2.734 6.823-3.261 1.439 3.47L2.7 21.469zm8.491-1.846l-.238-.574-1.843-4.445-.238-.573 6.336-3.475 2.374 6.134.375.981-6.766 1.952zm8.109-1.238l-.203-.531c-.003-.011-.001-.024-.006-.035l-.618-1.597-2.754-7.206 11.023-5.815 4.592 11.48L19.3 18.385zM28.964.314a.5.5 0 00-.929.371l6 15a.502.502 0 00.651.279.501.501 0 00.279-.65l-6.001-15zM18 21h-3c-1.14 0-2 .86-2 2v1.315l-5.879 6.859a.5.5 0 10.758.651L13.73 25H16v6.5a.5.5 0 001 0V25h2.27l5.85 6.825a.497.497 0 00.705.054.5.5 0 00.054-.705L20 24.315v-1.24C20 21.912 19.122 21 18 21zm1 3h-5v-1c0-.589.411-1 1-1h3c.57 0 1 .462 1 1.075V24z"/></symbol></svg>
+
+    <div class="wrapper">
+        <input type="checkbox" class="hidden" id="menu-control" />
+        <header class="gdoc-header">
+    <div class="container flex align-center justify-between">
+        
+        <label for="menu-control" class="gdoc-nav__control">
+            <svg class="icon menu"><use xlink:href="#menu"></use></svg>
+            <svg class="icon arrow-back"><use xlink:href="#arrow_back"></use></svg>
+        </label>
+        
+        <a class="gdoc-header__link" href="http://localhost">
+            <span class="gdoc-brand flex align-center">
+                <img class="gdoc-brand__img" src="/brand.svg" alt="K8S Operators Over EZ" width=38 height=38>
+                K8S Operators Over EZ
+            </span>
+        </a>
+    </div>
+</header>
+
+
+        <main class="container flex flex-even">
+            <aside class="gdoc-nav">
+                <nav>
+    
+
+
+    <sectio class="gdoc-nav--main">
+        
+            <h2>I. Introduction</h2>
+            
+
+
+
+
+<ul class="gdoc-nav__list">
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/introduction/"
+                    class="gdoc-nav__entry ">
+                    Introduction
+                </a>
+            </span>
+        
+
+        
+        
+            
+
+
+
+<ul class="gdoc-nav__list">
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/introduction/#the-problem"
+                    class="gdoc-nav__entry ">
+                    The Problem
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/introduction/#whats-an-operator"
+                    class="gdoc-nav__entry ">
+                    What&#39;s an Operator?
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/introduction/#how-do-operators-work"
+                    class="gdoc-nav__entry ">
+                    How do Operators Work?
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/introduction/#types-of-operators"
+                    class="gdoc-nav__entry ">
+                    Types of Operators
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+</ul>
+
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/introduction/resources/"
+                    class="gdoc-nav__entry ">
+                    Resources
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/introduction/lab-requirements/"
+                    class="gdoc-nav__entry ">
+                    Lab Requirements
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+</ul>
+
+
+
+
+        
+    </section>
+
+    <section class="gdoc-nav--main">
+        
+            <h2>II. Golang Operators</h2>
+            
+
+
+
+
+<ul class="gdoc-nav__list">
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/"
+                    class="gdoc-nav__entry ">
+                    Golang Operators
+                </a>
+            </span>
+        
+
+        
+        
+            
+
+
+
+<ul class="gdoc-nav__list">
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/#golang-operator-resources"
+                    class="gdoc-nav__entry ">
+                    Golang Operator Resources
+                </a>
+            </span>
+        
+
+        
+        
+            
+
+
+
+<ul class="gdoc-nav__list">
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/#development-libraries"
+                    class="gdoc-nav__entry ">
+                    Development Libraries
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/#useful-golang-api-references"
+                    class="gdoc-nav__entry ">
+                    Useful Golang API References
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+</ul>
+
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/#the-reconciliation-cycle---revisited"
+                    class="gdoc-nav__entry ">
+                    The Reconciliation Cycle - Revisited
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+</ul>
+
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/"
+                    class="gdoc-nav__entry is-active">
+                    Golang Operator Lab
+                </a>
+            </span>
+        
+
+        
+        
+            
+
+
+
+<ul class="gdoc-nav__list">
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/#environment-setup"
+                    class="gdoc-nav__entry ">
+                    Environment Setup
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/#lab-specifications"
+                    class="gdoc-nav__entry ">
+                    Lab Specifications
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/#execution-strategy"
+                    class="gdoc-nav__entry ">
+                    Execution Strategy
+                </a>
+            </span>
+        
+
+        
+        
+            
+
+
+
+<ul class="gdoc-nav__list">
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/#i-prototyping"
+                    class="gdoc-nav__entry ">
+                    I. Prototyping
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/#ii-operator-scaffolding"
+                    class="gdoc-nav__entry ">
+                    II. Operating Scaffolding
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/#iii-cr-definition-implementation"
+                    class="gdoc-nav__entry ">
+                    III. CR Definition Implementation
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/#iv-tdd-setup"
+                    class="gdoc-nav__entry ">
+                    IV. TDD Setup (Test Driven Design)
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/#v-cr-controller-implementation"
+                    class="gdoc-nav__entry ">
+                    V. CR Controller Implementation
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/#vi-test-validation"
+                    class="gdoc-nav__entry ">
+                    VI. Test Validation
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/lab/#vii-deployment"
+                    class="gdoc-nav__entry ">
+                    VII. Deployment
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+</ul>
+
+        
+    </li>
+
+
+</ul>
+
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/golang/debugging/"
+                    class="gdoc-nav__entry ">
+                    Debugging Golang Operators
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+</ul>
+
+
+
+
+        
+    </section>
+
+    <section class="gdoc-nav--main">
+        
+            <h2>III. Ansible Operators</h2>
+            
+
+
+
+
+<ul class="gdoc-nav__list">
+
+    
+    
+
+    <li>
+        
+        
+            
+            
+            
+            
+
+            <span class="flex">
+                
+                <a href="/ansible/"
+                    class="gdoc-nav__entry ">
+                    Ansible Operators
+                </a>
+            </span>
+        
+
+        
+        
+    </li>
+
+
+</ul>
+
+
+
+
+        
+    </section>
+
+    <section class="gdoc-nav--main">
+        
+            <h2>IV. Helm Operators</h2>
+            
+
+
+
+
+<ul class="gdoc-nav__list">
+
+    
+    
+
+    <li>
+        
+        
+            <span class="flex">
+                Helm Operators
+            </span>
+        
+
+        
+        
+    </li>
+
+
+</ul>
+
+
+
+
+        
+    </section>
+
+    <section class="gdoc-nav--main">
+        
+            <h2>V. Alternative Operators</h2>
+            
+
+
+
+
+<ul class="gdoc-nav__list">
+
+    
+    
+
+    <li>
+        
+        
+            <span class="flex">
+                Python Based Operators
+            </span>
+        
+
+        
+        
+    </li>
+
+
+    
+    
+
+    <li>
+        
+        
+            <span class="flex">
+                Java Based Operators
+            </span>
+        
+
+        
+        
+    </li>
+
+
+</ul>
+
+
+
+
+        
+    </section>
+
+    
+
+    
+</nav>
+
+            </aside>
+
+            <div class="gdoc-page">
+                
+    
+
+
+    
+
+
+
+
+
+
+<div class="gdoc-page__header flex flex-wrap justify-between hidden-mobile hidden " itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+    <span>
+        
+    </span>
+    <span>
+        
+    </span>
+</div>
+
+    <article class="gdoc-markdown">
+        <h1>Golang Operator Lab</h1>
+        
+
+
+
+    
+
+
+<div class="gdoc-page__anchorwrap"><h2 id="overview">Overview<a data-clipboard-text="http://localhost/golang/lab/#overview" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Overview" href="#overview"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>This is a guided lab. In comparison to some of the other operator labs that you will find in this guide, you will notice that this lab is heavier in annotations and explanations.</p>
+<p>Please do not rush through this lab. You should leverage this lab to <strong>learn</strong>, get things to work, experiment and &ldquo;break&rdquo; stuff. It&rsquo;s okay to do that here in this context.</p>
+<p>That being said, these labs are meant to be run in a sandboxed development environment. Do not run this lab in a critical and/or production environment.</p>
+<div class="gdoc-page__anchorwrap"><h2 id="how-to-use-this-lab">How to use this Lab<a data-clipboard-text="http://localhost/golang/lab/#how-to-use-this-lab" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor How to use this Lab" href="#how-to-use-this-lab"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>You can do either of the following in this lab:</p>
+<ol>
+<li>
+<p>Read through the lab in it&rsquo;s entirety and follow all of the directions, step by step. Going down this route, you will be given a crash course in Behavioral Driven Design (BDD), Test Driven Design (TDD), and how to apply them towards building a Golang based Operator. If this interests you, then proceed to the next section below.</p>
+<ul>
+<li><strong><em>OR</em></strong></li>
+</ul>
+</li>
+<li>
+<p>View the implementation of the lab code in it&rsquo;s entirety, study it, run it, and/or do with it what you will. If that is the case, the lab code can be found in the following location: <code>docs/02/lab</code></p>
+</li>
+</ol>
+<p>There&rsquo;s no wrong way to learn.</p>
+<div class="gdoc-page__anchorwrap"><h2 id="environment-setup">Environment Setup<a data-clipboard-text="http://localhost/golang/lab/#environment-setup" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Environment Setup" href="#environment-setup"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>Ensure lab pre-requisites have been met. See: <a href="/introduction/lab-requirements">Lab Requirements</a></p>
+<div class="gdoc-page__anchorwrap"><h2 id="lab-specifications">Lab Specifications<a data-clipboard-text="http://localhost/golang/lab/#lab-specifications" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Lab Specifications" href="#lab-specifications"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<div class="gdoc-page__anchorwrap"><h3 id="story-bddgherkin-style">Story (BDD/Gherkin Style)<a data-clipboard-text="http://localhost/golang/lab/#story-bddgherkin-style" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Story (BDD/Gherkin Style)" href="#story-bddgherkin-style"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
+<p><strong>TITLE</strong>: Overeasy Operator Requirements</p>
+<ul>
+<li>
+<p><strong>DESCRIPTION</strong></p>
+<ul>
+<li><strong>AS A</strong>: Developer</li>
+<li><strong>I WANT</strong>: An Operator with a single busybox pod that logs a user specified message and shuts down after a user specified amount of time. If a duration or message are not specified, then both will be supplied by a REST API call.</li>
+<li><strong>SO THAT</strong>: I can demonstrate the encapsulation of operational knowlege, leveraging the Operator Design Pattern.</li>
+</ul>
+</li>
+<li>
+<p><strong>SCENARIO 1</strong>: Shutdown the busybox pod after a user specified amount of time in seconds</p>
+<ul>
+<li><strong>GIVEN</strong>: An Operator instance</li>
+<li><strong>WHEN</strong>: the specification <code>timeout</code> is set to a numeric value in seconds</li>
+<li><strong>THEN</strong>: the busy box pod will remain available for the specified <code>timeout</code> duration in seconds,</li>
+</ul>
+</li>
+<li>
+<p><strong>SCENARIO 2</strong>: Log a user specified message before shutting down the busybox pod</p>
+<ul>
+<li><strong>GIVEN</strong>: An Operator instance</li>
+<li><strong>WHEN</strong>: the specification <code>message</code> is set to a string value</li>
+<li><strong>THEN</strong>: the busy box pod will log the message, from the <code>message</code> specification after the <code>timeout</code> duration has expired.</li>
+</ul>
+</li>
+<li>
+<p><strong>SCENARIO 3</strong>: Retrieve the <code>timeout</code> and <code>message</code> from a given REST API if one and/or the other is not supplied.</p>
+<ul>
+<li><strong>GIVEN</strong>: An Operator instance</li>
+<li><strong>WHEN</strong>: the specification <code>message</code> OR <code>timeout</code> is NOT set</li>
+<li><strong>THEN</strong>: the busy box pod will supply these values from the following REST API: <code>GET http://my-json-server.typicode.com/keunlee/test-rest-repo/golang-lab00-response</code></li>
+</ul>
+</li>
+<li>
+<p><strong>SCENARIO 4</strong>: Update status <code>expired</code> and <code>logged</code> when the busybox pod has expired</p>
+<ul>
+<li><strong>GIVEN</strong>: An Operator instance</li>
+<li><strong>WHEN</strong>: the busy box pod&rsquo;s duration has expired</li>
+<li><strong>AND</strong>: the busy box pod has logged a message</li>
+<li><strong>THEN</strong>: set the operators <code>expired</code> status to <code>true</code></li>
+<li><strong>AND</strong>: set the operators <code>logged</code> status to <code>true</code></li>
+</ul>
+</li>
+</ul>
+<div class="gdoc-page__anchorwrap"><h3 id="acceptance-criteria-notes">Acceptance Criteria Notes<a data-clipboard-text="http://localhost/golang/lab/#acceptance-criteria-notes" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Acceptance Criteria Notes" href="#acceptance-criteria-notes"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
+<ul>
+<li>The CRD must have a <code>timeout</code> specification attribute</li>
+<li>The Operator instance must shut down after the duration of <code>timeout</code> in seconds, has been reached</li>
+<li>The CRD must have a <code>message</code> specification attribute</li>
+<li>The Operator instance must log the message <code>message</code> before the container has stopped</li>
+<li>The CRD must have a <code>expired</code> status attribute</li>
+<li>The Operator must set the status of the busy box pod upon expiration, <code>expired</code></li>
+<li>The CRD must have a <code>logged</code> status attribute</li>
+<li>The Operator must set the status of the busy box pod when logging a message, <code>logged</code></li>
+<li>The Operator instance must retrieve a <code>message</code> and <code>timeout</code> value from a REST API call (<code>GET http://my-json-server.typicode.com/keunlee/test-rest-repo/golang-lab00-response</code>), if both are not initially supplied on the Operator Instance.</li>
+</ul>
+<div class="gdoc-page__anchorwrap"><h2 id="execution-strategy">Execution Strategy<a data-clipboard-text="http://localhost/golang/lab/#execution-strategy" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Execution Strategy" href="#execution-strategy"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>In a nutshell, we want our operator to start up a pod, running a busybox image for a specific duration and logging a user specific message, and then setting our Operator&rsquo;s status.</p>
+<p>We&rsquo;ll want our Operator to provision our busybox pod with the necessary attribute specifications, eventually.</p>
+<p>Our strategy to reach the end state is detailed as followed:</p>
+<p><img src="/assets/execution-strategy.png" alt=""></p>
+<ul>
+<li>
+<p><strong>I - Prototyping</strong> - Create a YAML specification for a pod which runs for a specified amount of time and logs a specific message. Do this to validate our design. We&rsquo;ll eventually want our Operator controller implementation to dynamically set the pods timeout duration and log message. For now, we will validate our prototype.</p>
+</li>
+<li>
+<p><strong>II - Operator Scaffolding</strong> - Scaffold a Golang Operator to give us an initial template for our CRD and Resource Controller</p>
+</li>
+<li>
+<p><strong>III - CR Definition Implementation</strong> - Add properties for your Custom Resources Specifications and Status attributes.</p>
+</li>
+<li>
+<p><strong>IV - TDD Setup</strong> - Create a Unit Test file for our Custom Resource Controller to validate our requirements leveraging TDD (Test Driven Design). We will validate the tests as we implement our controller.</p>
+</li>
+<li>
+<p><strong>V - CR Controller Implementation</strong>- Implement our Resource Controller logic to help fulfill the Story and Acceptance Criteria.</p>
+</li>
+<li>
+<p><strong>VI - Test Validation</strong> - Validate our Unit Tests. Sanity check our Operator so that it is indeed operating as intended.</p>
+</li>
+<li>
+<p><strong>VII - Deployment</strong> - Deploy the Operator to your Kubernetes cluster</p>
+</li>
+</ul>
+<blockquote class="gdoc-hint info">
+  CR is an acronym for &ldquo;Custom Resource&rdquo;
+</blockquote>
+
+<div class="gdoc-page__anchorwrap"><h3 id="i-prototyping">I. Prototyping<a data-clipboard-text="http://localhost/golang/lab/#i-prototyping" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor I. Prototyping" href="#i-prototyping"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
+<p>(0) Create a Workspace</p>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<p>Before you begin, make sure to set a directory that you&rsquo;d like to work from. This directory will contain all of your lab code.</p>
+<p>(1) Build a Proof of Concept</p>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<p>Let&rsquo;s begin by creating a project namespace in our cluster.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">kubectl create ns golang-op-lab-00
+</code></pre></div><p>set the current context to newly created namespace</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">kubens golang-op-lab-00
+</code></pre></div><p>Create the yaml for a pod which will start a busybox container and run for a specified duration, 15 seconds, and logs the message &ldquo;hello world&rdquo;.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># create the pod yaml</span>
+kubectl run busybox --image<span class="o">=</span>busybox --restart<span class="o">=</span>Never --dry-run -o yaml -- /bin/sh -c <span class="s1">&#39;sleep 15; echo &#34;hello world&#34;&#39;</span> &gt; golang-op-lab-00-pod.yaml
+</code></pre></div><p>Running the following will yield the following generated yaml contents:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">args</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">/bin/sh</span><span class="w">
+</span><span class="w">    </span>- -<span class="l">c</span><span class="w">
+</span><span class="w">    </span>- <span class="l">sleep 15; echo &#34;hello world&#34;</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span><span class="w">  </span><span class="nt">dnsPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterFirst</span><span class="w">
+</span><span class="w">  </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Never</span><span class="w">
+</span><span class="w"></span><span class="nt">status</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></code></pre></div><p>To deploy the pod, watch it&rsquo;s change in status after the set duration, and view the pods logs:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># deploy the pod</span>
+kubectl apply -f golang-op-lab-00-pod.yaml
+
+<span class="c1"># watch for changes on the pod, ctrl-c to exit the watch</span>
+watch kubectl get po
+
+<span class="c1"># display log messages</span>
+kubectl logs busybox -c busybox
+</code></pre></div><p>(2) Identify Domain Specific Operations</p>
+<p>At this point, we&rsquo;ve got a basic prototype of what we&rsquo;d like the final deployment state of our Operator in tried to
+The next step from here, is thinking about what our <strong>domain specific operations</strong> are. The previously generated pod YAML will not handle all of these operations as is. Rehashing requirements into domain specific operations:</p>
+<ul>
+<li>
+<p><strong>If a message and duration are supplied, create a busybox pod with a duration and message</strong> : This is pretty straightforward to automate. You just specify the <code>timeout</code> duration and <code>message</code> in the pods YAML. No real issues here.</p>
+</li>
+<li>
+<p><strong>If a message and duration are NOT supplied, then supply one from a REST API call, and then create a busybox pod with the duration and message</strong>:  Since we&rsquo;ve got a dynamic element at play here, we can automate this in code, w/in our CR Controller.</p>
+</li>
+</ul>
+<p>We now have a purpose for building an operator, which will automate our domain specification operations.</p>
+<div class="gdoc-page__anchorwrap"><h3 id="ii-operator-scaffolding">II. Operator Scaffolding<a data-clipboard-text="http://localhost/golang/lab/#ii-operator-scaffolding" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor II. Operator Scaffolding" href="#ii-operator-scaffolding"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
+<p>To begin codifying our domain specific operations, run the following to scaffold your operator and create a resource and controller. Say &lsquo;yes&rsquo; to all prompts.</p>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># scaffold a new operator - over-ez-operator</span>
+operator-sdk init --domain<span class="o">=</span>mydomain.com --repo<span class="o">=</span>github.com/mydomain/operators-over-ez
+
+<span class="c1"># create new api and controller</span>
+ operator-sdk create api --group<span class="o">=</span>operators-over-ez --version<span class="o">=</span>v1alpha1 --kind<span class="o">=</span>OpsOverEasy
+
+<span class="c1"># (you will be prompted the following) - create resource [y/n] y</span>
+
+<span class="c1"># (you will be prompted the following) - create controller [y/n] y</span>
+</code></pre></div><p>One you run the above, you&rsquo;ll see a number of files generated. Of those files, the CR Implementation and controller:</p>
+<ul>
+<li>
+<p>CR Implementation location: <code>api/v1alpha1/opsovereasy_types.go</code></p>
+</li>
+<li>
+<p>CR Controller location: <code>controllers/opsovereasy_controller.go</code></p>
+</li>
+</ul>
+<p>These resources will be particularly important going forward.</p>
+<div class="gdoc-page__anchorwrap"><h3 id="iii-cr-definition-implementation">III. CR Definition Implementation<a data-clipboard-text="http://localhost/golang/lab/#iii-cr-definition-implementation" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor III. CR Definition Implementation" href="#iii-cr-definition-implementation"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
+<p>(1) Add specification and status attributes, per requirements.</p>
+<p>In this step, you will define your operator specifications and status attributes.</p>
+<blockquote class="gdoc-hint info">
+  For reference, the full CR Definition Implementation can be found at: <code>lab/api/v1alpha1/opsovereasy_types.go</code>
+</blockquote>
+
+<p><strong>Operator Specifications</strong>:</p>
+<p>These are user defined properties of your operator. When you add a specification, you typically implement your operator to respond/react off of the specification that is set.</p>
+<p><ins>Example 1</ins></p>
+<p><em>We set the specifications <code>timeout</code> and <code>message</code> to finite/non-null values in our operator instance yaml. When we create the operator instance, our operator is expected to then deploy a busybox pod, which will run the busybox container for the <code>timeout</code> duration and log the <code>message</code>.</em></p>
+<p><ins>Example 2</ins></p>
+<p><em>We leave the specifications for <code>timeout</code> and <code>message</code> unset in our operator instance yaml. When we create the operator instance, our operator is expected to then obtain values for <code>timeout</code> and <code>message</code> from a REST API call and then deploy a busybox pod, which will run the busybox container for the <code>timeout</code> duration and log the <code>message</code>.</em></p>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<p>Edit the file <code>api/v1alpha1/opsovereasy_types.go</code> by adding the <code>timeout</code> and <code>message</code> specifications w/in the <code>OpsOverEasySpec struct</code> definition. It should look like the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// OpsOverEasySpec defines the desired state of Mycrd
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">OpsOverEasySpec</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="c1">// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
+</span><span class="c1"></span>	<span class="c1">// Important: Run &#34;make&#34; to regenerate code after modifying this file
+</span><span class="c1"></span>
+	<span class="c1">// Accommodate requirements and acceptance criteria
+</span><span class="c1"></span>
+	<span class="c1">// Timeout duration, in seconds
+</span><span class="c1"></span>	<span class="nx">Timeout</span> <span class="kt">int32</span> <span class="s">`json:&#34;timeout,omitempty&#34;`</span>
+
+	<span class="c1">// Log message to output before container expires
+</span><span class="c1"></span>	<span class="nx">Message</span> <span class="kt">string</span> <span class="s">`json:&#34;message,omitempty&#34;`</span>
+<span class="p">}</span>
+</code></pre></div><p>Our <strong>CR Controller</strong>, must implement the logic, workflow and functionality to facilitate these examples, which are based on our requirements.</p>
+<p><strong>Operator Statuses</strong>:</p>
+<p>These are user defined properties for checking the status/state of your operator deployment. When you add a status, you typically implement your operator to provide the state/value of the status.</p>
+<p><ins>Example</ins></p>
+<p><em>When we deploy our operator, we expect a busybox pod to be spun up, log message, and then spin down after set duration. When the pod has reached this state, then the operator will need to set it&rsquo;s status for <code>expired</code> and <code>logged</code> to <code>true</code>.</em></p>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<p>Edit the file <code>api/v1alpha1/opsovereasy_types.go</code> by adding the <code>expired</code> and <code>logged</code> statuses w/in the <code>OpsOverEasyStatus struct</code> definition. It should look like the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// MycrdStatus defines the observed state of Mycrd
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">OpsOverEasyStatus</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="c1">// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
+</span><span class="c1"></span>	<span class="c1">// Important: Run &#34;make&#34; to regenerate code after modifying this file
+</span><span class="c1"></span>
+	<span class="c1">// Denotes if the time duration has expired
+</span><span class="c1"></span>	<span class="nx">TimeoutExpired</span> <span class="kt">bool</span> <span class="s">`json:&#34;expired,omitempty&#34;`</span>
+
+	<span class="c1">// Denotes if a message was logged
+</span><span class="c1"></span>	<span class="nx">MessageLogged</span> <span class="kt">bool</span> <span class="s">`json:&#34;logged,omitempty&#34;`</span>
+<span class="p">}</span>
+</code></pre></div><p>(2) Regenerate/update resource and manifest</p>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<p>Always do this after you update your custom resource in <code>*_types.go</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># generate/update code for resource types</span>
+make generate
+
+<span class="c1"># generate/update manifests for the CRD</span>
+make manifests
+</code></pre></div><p>You can validate specification updates on your CRD by examining the updated file: <code>config/crd/bases/operators-over-ez.mydomain.com_opsovereasies.yaml</code>. You should see that your newly added specifications, <code>timeout</code> and <code>message</code>, have been added.</p>
+<div class="gdoc-page__anchorwrap"><h3 id="iv-tdd-setup">IV. TDD Setup<a data-clipboard-text="http://localhost/golang/lab/#iv-tdd-setup" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor IV. TDD Setup" href="#iv-tdd-setup"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
+<p>For this lab we will be taking a TDD (Test Driven Design) approach to building and implementing our operator.</p>
+<p><strong>(1)</strong> Update the Test Suite</p>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<p>When we generated our custom resource definition and controller, we also generated a stub for a test suite.</p>
+<blockquote class="gdoc-hint info">
+  For reference, the full Test Suite Implementation can be found at:  <code>lab/controllers/suite_test.go</code>
+</blockquote>
+
+<p>Copy the contents of the file to your local Test Suite file: <code>controllers\suite_test.go</code></p>
+<p><strong>(2)</strong> Observation of updates</p>
+<p>In these following sections, we will make observations on the additions added to the Test Suite file.</p>
+<ul>
+<li>
+<p><strong>(a)</strong> Added additional package imports that we will be leveraging</p>
+<ul>
+<li><img src="https://user-images.githubusercontent.com/61749/91213646-86137280-e6d7-11ea-9cb2-e3c47e49dac5.png" alt="Screenshot from 2020-08-25 13-27-28"></li>
+</ul>
+</li>
+<li>
+<p><strong>(b)</strong> Added additional variables and helper functions that we&rsquo;d like to make available to our controller tests.</p>
+<ul>
+<li>Public variables and functions are accessible in the test suite by our controller test. Leveraging this feature, we can reuse these methods, potentially, across multiple controller test files.</li>
+<li>Variables:
+<ul>
+<li><em>k8sManager</em>: Instance of our Kubernetes API Manager.</li>
+<li><em>opsOverEasyReconciler</em>: Instance of our Controller.</li>
+<li><em>crdInstance</em>: Instance of our Custom Resource.</li>
+<li><em>testCtx</em>: Intance of our testing context.</li>
+<li><em>timeout</em>: Timeout duration for asynch tests. Used primarily for evaluating Ginkgo/Gomega <code>Eventually</code> async assertions.</li>
+<li><em>interval</em>: Interval to evaluate async assertions.</li>
+<li><em>podDuration</em>: Duration for which our busybox pods will run for</li>
+</ul>
+</li>
+<li>Functions:
+<ul>
+<li><em>getCrKey</em>: Helper method for building a key for the Custom Resource.</li>
+<li><em>getPodKey</em>: Helper method for building a key for a Pod Resource.</li>
+<li><em>getCrd</em>: Helper method for building a Custom Resource Definition instance with or without specification attributes provided.</li>
+</ul>
+</li>
+<li><img src="https://user-images.githubusercontent.com/61749/91213648-86ac0900-e6d7-11ea-8e76-ce9a12abc3ce.png" alt="Screenshot from 2020-08-25 13-28-28"></li>
+</ul>
+</li>
+<li>
+<p><strong>(c)</strong> Bootstrap our test enviornment to a real cluster.</p>
+<ul>
+<li>Since we&rsquo;ll need to validate the internals of our deployment (i.e. such as pod phase, etc.), we&rsquo;ll want to run these tests against a live cluster. To automate a test cluster, one suggestion would be to automate the provisioning of a cluster, leveraging a lightweight cluster implementation such as  <a href="https://kind.sigs.k8s.io/docs/user/quick-start/">Kind</a> or <a href="https://k3d.io/">K3S/K3D</a></li>
+<li><img src="https://user-images.githubusercontent.com/61749/91213651-86ac0900-e6d7-11ea-9ed3-356f9979aff3.png" alt="Screenshot from 2020-08-25 13-30-49"></li>
+</ul>
+</li>
+<li>
+<p><strong>(d)</strong> Setup our Custom Resource Controller.</p>
+<ul>
+<li>Create an instance of our controller reconciler that we&rsquo;ll be using in our controller tests</li>
+<li>Add the appropriate &ldquo;watches&rdquo; on the resources that the Custom Resource owns.</li>
+<li>The call to <code>(opsOverEasyReconciler).SetupWithManager(k8sManager)</code> is responsible for add &ldquo;watches&rdquo; on resources owned by your Custom Resource. You will later implement this method in your controller.</li>
+<li><img src="https://user-images.githubusercontent.com/61749/91213653-86ac0900-e6d7-11ea-8949-357876ec1228.png" alt="Screenshot from 2020-08-25 13-31-25"></li>
+</ul>
+</li>
+<li>
+<p><strong>(e)</strong> Automate the uninstall of a CRD after it has been tested on our cluster.</p>
+<ul>
+<li><img src="https://user-images.githubusercontent.com/61749/91213655-86ac0900-e6d7-11ea-8ffd-f0816fc49b84.png" alt="Screenshot from 2020-08-25 13-31-52"></li>
+</ul>
+</li>
+</ul>
+<p><strong>(3)</strong> Add Controller Tests and define Test Stubs</p>
+<p>For our tests, we are leveraging the Golang Testing Libraires <a href="https://onsi.github.io/ginkgo/">Ginkgo</a> and <a href="https://onsi.github.io/gomega/">Gomega</a>. More information can be found by clicking on the links.</p>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<blockquote class="gdoc-hint info">
+  For reference, the <strong>fully</strong> implemented Controller Test file can be found here:  <code>lab/controllers/opsovereasy_controller_test.go</code>.
+</blockquote>
+
+<p>Create the following file: <code>controllers/opsovereasy_controller_test.go</code></p>
+<p>And copy the contents of the <strong>&ldquo;fully&rdquo;</strong> implemented Controller Test into it.</p>
+<p>Notice how each test corresponds to a BDD scenario, as noted in the comments of each test.</p>
+<p>As we implement our Custom Resource Controller, we will leverage these tests to validate our scenario requirements and controller implementation.</p>
+<p>You can run them by executing the following at the root of the source directory:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">make <span class="nb">test</span>
+</code></pre></div><p>This will run the entire Test Suite.</p>
+<p>When you run this, all tests will fail at this point. This is as expected, since we have not yet implemented our Resource Controller.</p>
+<p>Let&rsquo;s go ahead and look at the Controller Test file and examine it in further details.</p>
+<ul>
+<li>
+<p><strong>(a)</strong>: Added variables and helper functions that we&rsquo;d like to make available to our controller tests.</p>
+<ul>
+<li>Variables:
+<ul>
+<li><em>pod</em>: The pod instance we&rsquo;ll be using to track our busybox pod deployment.</li>
+<li><em>currUuid</em>: A naming helper that we use to assist in allowing us to create unique Custom Resource and Pod instance names.</li>
+</ul>
+</li>
+<li>Functions:
+<ul>
+<li><em>createReconcileRequest</em>: Invokes the <code>Reconcile</code> method of our controller, thereby changing the state of our Operator.</li>
+<li><em>getPodLogs</em>: Retrieves the &ldquo;logs&rdquo; of a pod leveraging Kubernetes API calls and returns them as a string.</li>
+</ul>
+</li>
+<li><img src="https://user-images.githubusercontent.com/61749/91254401-f1853080-e727-11ea-9e4c-315bf2949959.png" alt="Screenshot from 2020-08-25 23-06-10"></li>
+</ul>
+</li>
+<li>
+<p><strong>(b)</strong>: For each test, we must ensure that a new Operator instance is created for the current running test. These additions will create a new Custom Resource instance and Custom Resource Controller instance for each test that is ran.</p>
+<ul>
+<li>On running of the <code>BeforeEach</code> method, a new Operator instance will be created.</li>
+<li>On running of the <code>AfterEach</code> method, the last Operator instance, is deleted. When deleted, any resources created and &ldquo;watched&rdquo; by the Operator instance (i.e. pods, etc.) are also deleted.</li>
+<li><img src="https://user-images.githubusercontent.com/61749/91254402-f21dc700-e727-11ea-9757-0f1134ba5218.png" alt="Screenshot from 2020-08-25 23-07-30"></li>
+</ul>
+</li>
+<li>
+<p><strong>(c)</strong>: The entire Custom Resource Controller test file has been structured and implemented in a way to follow the Gherkin as noted in the requirements. Please see the full implementation of the Custom Resource Controller Test if you have not done so.</p>
+<ul>
+<li>By being able to create your tests up front like this, before the Controller implementation, you force the design and implementation of your controller. Your tests will dictate the controllers implementation. This is a hallmark of Test Driven Design (TDD).</li>
+</ul>
+</li>
+</ul>
+<div class="gdoc-page__anchorwrap"><h3 id="v-cr-controller-implementation">V. CR Controller Implementation<a data-clipboard-text="http://localhost/golang/lab/#v-cr-controller-implementation" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor V. CR Controller Implementation" href="#v-cr-controller-implementation"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<blockquote class="gdoc-hint info">
+  For reference, a <strong>fully</strong> implemented Custom Resource Controller can be found at: <code>lab/controllers/opsovereasy_controller.go</code>
+</blockquote>
+
+<p>Copy the contents of the file to your local Custom Resource Controller: <code>controllers\opsovereasy_controller.go</code></p>
+<p>Let us now examine the Resource Controller implementation from the context of the Reconciliation Cycle.</p>
+<p><img src="/assets/resource-controller-reconciliation-cycle-golang-operators.png" alt=""></p>
+<div class="gdoc-page__anchorwrap"><h4 id="i-observewatch-phase">I. Observe/Watch Phase<a data-clipboard-text="http://localhost/golang/lab/#i-observewatch-phase" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor I. Observe/Watch Phase" href="#i-observewatch-phase"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h4></div>
+<p>For our Operator, we are deploying a busybox pod through our Operator deployment.</p>
+<p>In order for our Operator to keep an eye on this pod, we need to watch for changes that happen upon it.</p>
+<blockquote class="gdoc-hint warning">
+  Analyze This
+</blockquote>
+
+<p>To do that we specify the resource type(s) that our Operator will be deploying and looking at by leveraging the Controller Runtime API call to <code>Owns</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/61749/91593258-75583c00-e925-11ea-9451-865baa9bdc67.png" alt="Screenshot from 2020-08-28 11-49-37"></p>
+<p>In this context, <code>Owns</code> defines types of Objects being <em>generated</em> by the <code>NewControllerManagedBy</code>, and configures the <code>NewControllerManagedBy</code> to respond to create / delete / update events by <em>reconciling the owner object</em>, which in this case <code>&amp;corev1.Pod{}</code>.</p>
+<p>In other words, if there&rsquo;s a resource type that your operator is deploying, and you&rsquo;d like to keep tabs on it, then use <code>Owns</code> to keep tabs on the resource type that you want to keep tabs on.</p>
+<p>Should you have more types of resources that you want to deploy and keep tabs on, you can do so by chaining the <code>Owns</code> API (i.e. <code>...Owns(&amp;corev1.Pod{}).Owns(&amp;corev1.PersistentVolume{}.Owns(/****/).Complete(r)</code> )</p>
+<p>You can get more information about available resource types (i.e. pods, services, pv, pvc, etc.) here:</p>
+<ul>
+<li><a href="https://pkg.go.dev/k8s.io/api@v0.19.0/core/v1?tab=doc">https://pkg.go.dev/k8s.io/api@v0.19.0/core/v1?tab=doc</a></li>
+<li><a href="https://github.com/kubernetes/api/blob/v0.19.0/core/v1/types.go">https://github.com/kubernetes/api/blob/v0.19.0/core/v1/types.go</a></li>
+</ul>
+<div class="gdoc-page__anchorwrap"><h4 id="ii-analyze-phase">II. Analyze Phase<a data-clipboard-text="http://localhost/golang/lab/#ii-analyze-phase" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor II. Analyze Phase" href="#ii-analyze-phase"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h4></div>
+<p>Since we are starting off with a new Operator instance, the desired state for our operator will be a new instance.</p>
+<p>An instance definition of that operator with respect to our Custom Resource Definition might look like this.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">operators-over-ez.mydomain.com/v1alpha1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">OpsOverEasy</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">opsovereasy-sample</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="c"># specification attributes as defined in the CRD</span><span class="w">
+</span><span class="w">  </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="m">15</span><span class="w">
+</span><span class="w">  </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;hello world&#34;</span><span class="w">
+</span></code></pre></div><p>Which will yield a busybox pod for 15 seconds and then log the message &ldquo;hello world&rdquo; before the pod stops as well as updating the operator&rsquo;s status fields. Ultimately the final state of our operator instance&rsquo;s resources would report <code>0/1</code> pods running and would look like this if we queried the operator instance (notice the added status attributes):</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># at terminal: kubectl get opsovereasies your-operator-instance -o yaml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">operators-over-ez.mydomain.com/v1alpha1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">OpsOverEasy</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">opsovereasy-sample</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="c"># specification attributes as defined in the CRD</span><span class="w">
+</span><span class="w">  </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="m">15</span><span class="w">
+</span><span class="w">  </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;hello world&#34;</span><span class="w">
+</span><span class="w"></span><span class="nt">status</span><span class="p">:</span><span class="w"> 
+</span><span class="w">   </span><span class="c"># status attributes as defined in the CRD</span><span class="w">
+</span><span class="w">   </span><span class="c"># NOTE: these are added/updated after the `timeout` duration and log `message`</span><span class="w">
+</span><span class="w">  </span><span class="nt">expired</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="nt">logged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></code></pre></div><p>By design, our operator will add/update the status attributes after the <code>timeout</code> duration has been reached and a <code>message</code> has been logged.</p>
+<div class="gdoc-page__anchorwrap"><h4 id="iii-actreconcile-phase">III. Act/Reconcile Phase<a data-clipboard-text="http://localhost/golang/lab/#iii-actreconcile-phase" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor III. Act/Reconcile Phase" href="#iii-actreconcile-phase"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h4></div>
+<p><strong>Setting Operator Permissions on Resources</strong></p>
+<p>To ensure that we are able to reconcile all of the resources that we are watching we need to make sure that we are authorized to do so. Specifically, we need to specify the types of resources that we watch.</p>
+<blockquote class="gdoc-hint warning">
+  Analyze This
+</blockquote>
+
+<p>We can do that by adding a few extra directives in the form of comments, right above our <code>Reconcile</code> function.</p>
+<p><img src="https://user-images.githubusercontent.com/61749/91593261-75f0d280-e925-11ea-80df-2adede7533e9.png" alt="Screenshot from 2020-08-28 11-50-52"></p>
+<p>The first line translates:</p>
+<ul>
+<li><em>for all resource <code>deployments</code> in the <code>apps</code> groups, allow the following actions by our operator</em>
+<ul>
+<li><em>get</em></li>
+<li><em>list</em></li>
+<li><em>watch</em></li>
+<li><em>create</em></li>
+<li><em>update</em></li>
+<li><em>patch</em></li>
+<li><em>delete</em></li>
+</ul>
+</li>
+</ul>
+<p>The second line similarly translates:</p>
+<ul>
+<li><em>for all resource <code>pods</code> in the <code>apps</code> groups, allow the following actions by our operator</em>
+<ul>
+<li><em>get</em></li>
+<li><em>list</em></li>
+<li><em>watch</em></li>
+<li><em>create</em></li>
+<li><em>update</em></li>
+<li><em>patch</em></li>
+<li><em>delete</em></li>
+</ul>
+</li>
+</ul>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<p>After adding the following we need to run the following at the terminal to update our RBAC policies for our Operator:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># generate/update code for resource types</span>
+make generate
+
+<span class="c1"># generate/update manifests for the CRD</span>
+make manifests
+</code></pre></div><p><strong>Reconcile Function Implementation - Breakdown</strong></p>
+<p>Let us now dissect our <code>Reconcile</code> function.</p>
+<!-- - Creating/Updating resources such as our busybox `pod`
+- Facilitating Domain Specific Operations. In our case, 
+  - Setting `message` and `timeout` spec attributes with the response of a REST API response
+  - Setting `logged` and `expired` status attributes when our pod has successfully run it's duration.
+  - Requeuing and terminating the Reconciliation cycle -->
+<p><strong>(a)</strong>: Here we make an attempt to retrieve an instance of our Custom Resource. That is done by the call to <code>r.Client.Get</code>. When this method executes and all goes well it will populate the <code>instance</code> of <code>OpsOverEasy{}</code>. Otherwise, the <code>err</code> object is populated. We validate this with the <code>err</code> check.</p>
+<p><img src="https://user-images.githubusercontent.com/61749/91627926-bcbfe600-e980-11ea-9b94-0c84b1c580e9.png" alt="Screenshot from 2020-08-28 22-45-18"></p>
+<p><strong>(b)</strong>: Here we fullfill the requirement of obtaining values for specification attributes <code>message</code> and <code>timeout</code> from a REST API response. This code is executed only, if the specification attributes are not provided. We make our call to retrieve the API response, and assign new values to <code>message</code> and <code>timeout</code>. Once assigned, we make sure to update the operator instance by the call to <code>r.Client.Update</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/61749/91627927-bcbfe600-e980-11ea-98bb-98b1d6ad94b2.png" alt="Screenshot from 2020-08-28 22-45-54"></p>
+<p><strong>(c)</strong>: Here we make a resource definition for a busybox <code>pod</code>. With this definition we&rsquo;ll be able to query if the <code>pod</code> has already been created in a previous <code>Reconcile</code> or if the <code>pod</code> needs to be recreated. We make the pod resource definition through a custom function <code>newPodForCR</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/61749/91627928-bcbfe600-e980-11ea-880b-9441744d94a6.png" alt="Screenshot from 2020-08-28 22-47-45"></p>
+<p>If we look at the implementaiton of the <code>newPodForCR</code> function, we see some familiar looking code that isn&rsquo;t quite yaml:</p>
+<p><img src="https://user-images.githubusercontent.com/61749/91628351-6f457800-e984-11ea-8d5c-52c7376eb3e8.png" alt="Screenshot from 2020-08-28 23-15-50"></p>
+<p>This is equivalent to the following yaml:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span>{{<span class="l">cr.Name}}</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span>{{<span class="l">cr.Name}}-pod</span><span class="w">
+</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span>{{<span class="l">cr.Namespace}}</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">args</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">/bin/sh</span><span class="w">
+</span><span class="w">    </span>- -<span class="l">c</span><span class="w">
+</span><span class="w">    </span>- <span class="l">sleep {{timeout}}; echo {{message}}</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span><span class="w">  </span><span class="nt">dnsPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterFirst</span><span class="w">
+</span><span class="w">  </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Never</span><span class="w">
+</span><span class="w"></span><span class="nt">status</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span><span class="w">
+</span></code></pre></div><p><strong>(d)</strong>: In this block, we attempt to apply our pod definition if one doesn&rsquo;t exist. This is the eqivalent of taking the above pod <code>yaml</code> definition and running <code>kubectl apply -f</code> on it. The code equivalent of this statement is seen in the call to <code>r.Client.Create</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/61749/91628246-7b7d0580-e983-11ea-98f4-efdf873c4c9b.png" alt="Screenshot from 2020-08-28 23-08-37"></p>
+<p><strong>(e)</strong>: In this block, we update the status of the Operator based on the busybox <code>pods</code> current state. We set the status of the <code>pod</code> after it has run it&rsquo;s course and reaches a status of <code>PodSucceeded</code>. Once an updated status has been assigned, we must then update the status by a call to <code>r.Client.Status().Update</code>.</p>
+<p>This block will likely not execute in the first call to <code>Reconcile</code> since the pod must be created first and then live out it&rsquo;s duration, specified by <code>timeout</code>. It will only execute in subsequent calls/triggers to <code>Reconcile</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/61749/91628247-7c159c00-e983-11ea-941d-7d6d3e5e7756.png" alt="Screenshot from 2020-08-28 23-08-57"></p>
+<p><strong>(f)</strong>: At this point, our operator has reached it&rsquo;s desired state. The reconciliation cycle will not execute until another change in state on the operator is requested.</p>
+<p><img src="https://user-images.githubusercontent.com/61749/91627980-25a75e00-e981-11ea-9b30-2b45cbd0f9e3.png" alt="Screenshot from 2020-08-28 22-52-00"></p>
+<p><strong>A Note on Reconcile Return Values</strong></p>
+<p>Notice that different variations of: <code>return ctrl.Result</code> that you see in the Reconcile function.</p>
+<p>The Reconcile function can be ordered retrigger (or requeue) based on variations of the return value.</p>
+<p>There&rsquo;s meaning to these variations. They are as followed:</p>
+<ul>
+<li>Reconcile is successful and do NOT requeue for re-trigger
+<ul>
+<li><code>return ctrl.Result{}, nil</code></li>
+</ul>
+</li>
+<li>Reconcile has failed from error and requeue for re-trigger
+<ul>
+<li><code>return ctrl.Result{}, err</code></li>
+</ul>
+</li>
+<li>Requeue the Reconcile for re-trigger
+<ul>
+<li><code>return ctrl.Result{Reqeue: true}, nil</code></li>
+</ul>
+</li>
+<li>Requeue the Reconcile for re-trigger after a set amount of time
+<ul>
+<li><code>return ctrl.Result{RequeueAfter: time.Second*10}, nil</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Additional Observations</strong></p>
+<p>Variables and helper functions:</p>
+<ul>
+<li>Variables/Structs:
+<ul>
+<li><em>ApiSampleResponse</em>: The response object type that we leverage when unmarshalling the sample REST API response</li>
+</ul>
+</li>
+<li>Functions:
+<ul>
+<li><em>newPodForCR</em>: This function creates a busybox pod definition</li>
+<li><em>getSampleRestAPIResponse</em>: This function makes a REST API request and returns the response as an <code>ApiSampleResponse</code> type.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/61749/91593263-76896900-e925-11ea-9568-e8b31cc13ed9.png" alt="Screenshot from 2020-08-28 11-54-36">
+<img src="https://user-images.githubusercontent.com/61749/91593265-76896900-e925-11ea-91d1-d7d5090a07f9.png" alt="Screenshot from 2020-08-28 11-55-14"></p>
+<div class="gdoc-page__anchorwrap"><h3 id="vi-test-validation">VI. Test Validation<a data-clipboard-text="http://localhost/golang/lab/#vi-test-validation" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor VI. Test Validation" href="#vi-test-validation"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
+<div class="gdoc-page__anchorwrap"><h4 id="i-running-tests">I. Running Tests<a data-clipboard-text="http://localhost/golang/lab/#i-running-tests" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor I. Running Tests" href="#i-running-tests"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h4></div>
+<p>To run tests on your operator, run the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">make <span class="nb">test</span>
+</code></pre></div><div class="gdoc-page__anchorwrap"><h4 id="ii-run-and-validate-your-operator-locally">II. Run and Validate Your Operator Locally<a data-clipboard-text="http://localhost/golang/lab/#ii-run-and-validate-your-operator-locally" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor II. Run and Validate Your Operator Locally" href="#ii-run-and-validate-your-operator-locally"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h4></div>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<p>To run the operator locally without deploying it to your cluster, from the root of the code directory (<code>docs/02/lab</code>).</p>
+<p><strong>(a)</strong></p>
+<p>Run the following ( we will call this terminal #1):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># install the Operator CRD</span>
+make install
+
+<span class="c1"># run the operator locally</span>
+make run <span class="nv">ENABLE_WEBHOOKS</span><span class="o">=</span><span class="nb">false</span>
+</code></pre></div><p><strong>(b)</strong></p>
+<p>In a separate terminal (terminal #2):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># create an operator instance</span>
+kubectl apply -f config/samples/operators-over-ez_v1alpha1_opsovereasy.yaml
+
+<span class="c1"># describe the operator instance you&#39;ve created.</span>
+<span class="c1"># depending on the state of the operator and it&#39;s deployment, you may want</span>
+<span class="c1"># to run this multiple times to observe the operator&#39;s state changes</span>
+<span class="c1"># or execute it in a `watch` statement to observe the operator&#39;s state changes</span>
+<span class="c1"># i.e. watch describe opsovereasies opsovereasy-sample </span>
+kubectl describe opsovereasies opsovereasy-sample
+</code></pre></div><p><strong>(c)</strong></p>
+<p><code>ctrl-c</code> in terminal #1 to stop the operator from running. Run the following to remove the operator from your cluster:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># uninstall the operator and it&#39;s associated deployments. </span>
+make uninstall
+</code></pre></div><div class="gdoc-page__anchorwrap"><h3 id="vii-deployment">VII. Deployment<a data-clipboard-text="http://localhost/golang/lab/#vii-deployment" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor VII. Deployment" href="#vii-deployment"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
+<div class="gdoc-page__anchorwrap"><h4 id="conventional-artifact-based-deployment">Conventional Artifact-based Deployment<a data-clipboard-text="http://localhost/golang/lab/#conventional-artifact-based-deployment" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Conventional Artifact-based Deployment" href="#conventional-artifact-based-deployment"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h4></div>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<p>For this method of deployment, we will containerize our operator as a deployable artifact. To create that artifact, we will be leveraging a container registry. Examples of container registry providers (not an exhaustive list):</p>
+<ul>
+<li>Docker Hub</li>
+<li>Quay.io</li>
+<li>VMware Harbor</li>
+<li>Google Container Registry</li>
+<li>Azure Container Registry</li>
+</ul>
+<p><strong>(a)</strong>: Login to Container Registry via Docker CLI</p>
+<p>Before proceeding you will need to make sure that you have logged into your container registry.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># example login</span>
+<span class="c1"># docker login quay.io</span>
+<span class="c1"># docker login registry-1.docker.io</span>
+<span class="c1"># docker login your-container-registry.io</span>
+</code></pre></div><p><strong>(b)</strong>: Build and Push Operator Image to Container Registry</p>
+<p>Once you have logged in, execute the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">UNAME</span><span class="o">=</span>&lt;container-registry-account-username&gt;
+<span class="nb">export</span> <span class="nv">IMG</span><span class="o">=</span>quay.io/<span class="nv">$UNAME</span>/overeasy-operator:v0.0.1
+
+make docker-build
+make docker-push
+</code></pre></div><p><strong>(c)</strong>: Deploy the Operator</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">NAMESPACE</span><span class="o">=</span><span class="s2">&#34;default&#34;</span>
+<span class="nb">cd</span> config/default/ <span class="o">&amp;&amp;</span> kustomize edit <span class="nb">set</span> namespace <span class="nv">$NAMESPACE</span> <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ../..
+
+make deploy
+</code></pre></div><div class="gdoc-page__anchorwrap"><h4 id="validate-your-deployment">Validate Your Deployment<a data-clipboard-text="http://localhost/golang/lab/#validate-your-deployment" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Validate Your Deployment" href="#validate-your-deployment"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h4></div>
+<blockquote class="gdoc-hint danger">
+  Do This
+</blockquote>
+
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Verify your CRD is available - should yield a result</span>
+kubectl get crd opsovereasies
+
+<span class="c1"># Create an instance of the operator</span>
+kubectl apply -f config/samples/operators-over-ez_v1alpha1_opsovereasy.yaml
+
+<span class="c1"># Verify the operator instance was create - should yield a result</span>
+kubectl get opsovereasies
+
+<span class="c1"># Verify the busybox pod from the operator is deployed - should yield a result</span>
+kubectl get po opsovereasy-sample-pod
+</code></pre></div><!-- [Goto Previous Section](01-golang-operators.md)
+
+[Goto Next Section](03-debugging-golang-operators.md)
+
+[Return to Table of Contents](../../../../)
+ -->
+
+
+    </article>
+
+                
+
+
+
+
+
+
+
+
+    
+    
+
+    
+
+
+
+
+
+<div class="gdoc-page__footer flex flex-wrap justify-between">
+    
+    
+        <span class="gdoc-page__nav">
+            
+        </span>
+        <span class="gdoc-page__nav">
+            
+        </span>
+    
+</div>
+
+            </div>
+        </main>
+
+        <footer class="gdoc-footer">
+    <div class="container flex flex-wrap">
+        <span class="gdoc-footer__item">
+            Built with <a href="https://gohugo.io/" class="gdoc-footer__link">Hugo</a> and
+            <svg class="icon heart"><use xlink:href="#heart"></use></svg>
+        </span>
+        
+        <span class="gdoc-footer__item">
+            <a href="https://blog.example.com/legal" class="gdoc-footer__link">Legal Notice</a>
+        </span>
+        
+        
+        <span class="gdoc-footer__item">
+            <a href="/privacy" class="gdoc-footer__link">Privacy Policy</a>
+        </span>
+        
+    </div>
+</footer>
+
+    </div>
+
+    
+
+
+<script defer src="/js/clipboard.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var clipboard = new ClipboardJS('.clip');
+    });
+</script>
+
+
+</body>
+</html>

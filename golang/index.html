@@ -2,18 +2,17 @@
 <html lang="en">
 
 <head>
-	<meta name="generator" content="Hugo 0.75.1" />
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="Golang Operators">
 
-<title> | K8S Operators Over EZ</title>
+<title>Golang Operators | K8S Operators Over EZ</title>
 
 <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 <link rel="stylesheet" href="/main.min.css" media="screen">
 <link rel="stylesheet" href="/custom.css" media="screen">
 
-<link rel="alternate" type="application/rss+xml" href="http://localhost/index.xml" title="K8S Operators Over EZ" />
+<link rel="alternate" type="application/rss+xml" href="http://localhost/golang/index.xml" title="K8S Operators Over EZ" />
 <!--Made with Geekdoc theme https://github.com/xoxys/hugo-geekdoc-->
 
 </head>
@@ -273,7 +272,7 @@
             <span class="flex">
                 
                 <a href="/golang/"
-                    class="gdoc-nav__entry ">
+                    class="gdoc-nav__entry is-active">
                     Golang Operators
                 </a>
             </span>
@@ -884,7 +883,7 @@
 </div>
 
     <article class="gdoc-markdown">
-        <h1></h1>
+        <h1>Golang Operators</h1>
         
 
 
@@ -892,17 +891,210 @@
     
 
 
-<h1 id="kubernetes-operators-done-over-easy">Kubernetes Operators Done Over-Easy</h1>
-<img src="/assets/overeasy.jpeg" width="450">
-<h1 id="how-to-contribute">How to Contribute</h1>
-<p>Did you want add something you didn&rsquo;t see here? (i.e. sample code, a lab write up, documentation additions, etc.)</p>
-<p>Did you find something that looked off?</p>
-<p>Here&rsquo;s what you can do:</p>
+<div class="gdoc-page__anchorwrap"><h2 id="prerequisites">Prerequisites<a data-clipboard-text="http://localhost/golang/#prerequisites" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Prerequisites" href="#prerequisites"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
 <ul>
-<li>Create an issue in the repository</li>
-<li>Create pull-requests for review</li>
+<li>Review the <a href="/introduction">introduction</a>, if you have not already</li>
+<li>Familiarity with Golang. If you are not familiar with Go, atleast go through this resource: <a href="https://tour.golang.org/welcome/1">https://tour.golang.org/welcome/1</a></li>
 </ul>
+<div class="gdoc-page__anchorwrap"><h2 id="agenda">Agenda<a data-clipboard-text="http://localhost/golang/#agenda" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Agenda" href="#agenda"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>This section will cover the following:</p>
+<ul>
+<li>Review options for working with Operators in Golang</li>
+<li>Useful Golang API References for working with CRDs, Controllers, and the <a href="https://github.com/kubernetes-sigs/controller-runtime">Controller Runtime</a></li>
+<li>Review the <a href="/introduction/#how-do-operators-work">Reconciliation Cycle</a> with Golang semantics</li>
+</ul>
+<p>Afterwards, you will take the plunge in a guided walkthrough.</p>
+<h1 id="golang-operator-resources">Golang Operator Resources</h1>
+<div class="gdoc-page__anchorwrap"><h2 id="development-libraries">Development Libraries<a data-clipboard-text="http://localhost/golang/#development-libraries" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Development Libraries" href="#development-libraries"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>Two resources you can check out for writing Operators in Golang:</p>
+<ul>
+<li><a href="https://operatorframework.io/">Operator Framework</a></li>
+<li><a href="https://book.kubebuilder.io/quick-start.html">Kubebuilder</a></li>
+</ul>
+<blockquote class="gdoc-hint info">
+  In this section, as we discuss Golang Operators, we will be referring to the <strong>Operator Framework</strong>, as we continue to discuss.
+</blockquote>
 
+<p>In case you are curious of some of the differences between the two, here&rsquo;s a recap: <a href="https://github.com/operator-framework/operator-sdk/issues/1758#issuecomment-517432349">What is the difference between kubebuilder and operator-sdk?</a></p>
+<div class="gdoc-page__anchorwrap"><h2 id="useful-golang-api-references">Useful Golang API References<a data-clipboard-text="http://localhost/golang/#useful-golang-api-references" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Useful Golang API References" href="#useful-golang-api-references"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<blockquote class="gdoc-hint info">
+  By no means, I&rsquo;m not expecting you to memorize or review in detail what the APIs below are and do. I expect you to just be aware of the location of these API docs, as they may come in handy as you build out your own operator(s) and would like to understand better what these APIs are, as the Golang Operator libaries/frameworks make heavy use of them.
+</blockquote>
+
+<p>The APIs below are commonly leveraged by Kubernetes. Subsequently, they are also commonly leveraged by Golang Operator development libraries (i.e. Operator SDK, Kubebuilder, etc.). You will make usage of these libaries, as well as others, when scaffolding your Operators for development. Many of the API reference docs come with inline examples of how to use them in code. This is just a small subset of what&rsquo;s actually available out here in the community.</p>
+<ul>
+<li>
+<p>Controller Runtime</p>
+<ul>
+<li>
+<p><a href="https://pkg.go.dev/github.com/kubernetes-sigs/controller-runtime?tab=doc">https://pkg.go.dev/github.com/kubernetes-sigs/controller-runtime?tab=doc</a></p>
+<ul>
+<li>The Kubernetes controller-runtime Project is a set of go libraries for building Controllers. It is leveraged by Kubebuilder and Operator SDK. Both are a great place to start for new projects. See Kubebuilder&rsquo;s Quick Start to see how it can be used.</li>
+<li>Package controllerruntime alias' common functions and types to improve discoverability and reduce the number of imports for simple Controllers.</li>
+<li>see: <a href="https://github.com/kubernetes-sigs/controller-runtime">https://github.com/kubernetes-sigs/controller-runtime</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://pkg.go.dev/sigs.k8s.io/controller-runtime?tab=doc">https://pkg.go.dev/sigs.k8s.io/controller-runtime?tab=doc</a></p>
+<ul>
+<li>Package controllerruntime provides tools to construct Kubernetes-style controllers that manipulate both Kubernetes CRDs and aggregated/built-in Kubernetes APIs. It defines easy helpers for the common use cases when building CRDs, built on top of customizable layers of abstraction. Common cases should be easy, and uncommon cases should be possible. In general, controller-runtime tries to guide users towards Kubernetes controller best-practices.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://pkg.go.dev/k8s.io/apimachinery?tab=overview">https://pkg.go.dev/k8s.io/apimachinery?tab=overview</a></p>
+<ul>
+<li>Scheme, typing, encoding, decoding, and conversion packages for Kubernetes and Kubernetes-like API objects.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://pkg.go.dev/k8s.io/api?tab=overview">https://pkg.go.dev/k8s.io/api?tab=overview</a></p>
+<ul>
+<li>Schema of the external API types that are served by the Kubernetes API server.</li>
+<li>Most notably, you will be able to find the types for constructing resources such as (to name a few):
+<ul>
+<li>Pods</li>
+<li>Services</li>
+<li>Deployments</li>
+<li>Replicasets</li>
+<li>Daemonsets</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://pkg.go.dev/k8s.io/client-go?tab=overview">https://pkg.go.dev/k8s.io/client-go?tab=overview</a></p>
+<ul>
+<li>Go clients for talking to a kubernetes cluster.</li>
+<li>see also: <a href="https://github.com/kubernetes/client-go">https://github.com/kubernetes/client-go</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="the-reconciliation-cycle---revisited">The Reconciliation Cycle - Revisited</h1>
+<blockquote class="gdoc-hint info">
+  In the introduction, we presented the reconciliation cycle in a resource controller as followed:
+</blockquote>
+
+<p><img src="/assets/resource-controller-reconciliation-cycle.png" alt=""></p>
+<blockquote class="gdoc-hint info">
+  In this section, we will recap the Reconciliation Cycle in more detail with Golang Operator specific embellishments to the Reconciliation Cycle, as shown below:
+</blockquote>
+
+<p><img src="/assets/resource-controller-reconciliation-cycle-golang-operators.png" alt=""></p>
+<p>Each stage in the Reconciliation Cycle, correspond to particular points of interest in a Resource Controller. In the context of the Operator Framework, A resource controller has the following general templated structure.</p>
+<blockquote class="gdoc-hint info">
+  FYI, don&rsquo;t try to memorize this template. Do understand that their are entry points for where you will implement the logic corresponding to specific stages in the reconciliation cycles. Those entry points are noted in the code comments below (i.e. OBSERVE/WATCH and ACT/RECONCILE stage)
+</blockquote>
+
+<blockquote class="gdoc-hint info">
+  <strong>The template below can be a &ldquo;code generated&rdquo; artifact</strong>, when using the Operator Framework. Once you&rsquo;ve generated your resource controller, it is then your responsiblity to fill in the rest of the template so that it functions and operates as you want. We will examine in more detail this feature when executing the labs portion of this guide.
+</blockquote>
+
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">controllers</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;context&#34;</span>
+
+	<span class="s">&#34;github.com/go-logr/logr&#34;</span>
+	<span class="s">&#34;k8s.io/apimachinery/pkg/runtime&#34;</span>
+	<span class="nx">ctrl</span> <span class="s">&#34;sigs.k8s.io/controller-runtime&#34;</span>
+	<span class="s">&#34;sigs.k8s.io/controller-runtime/pkg/client&#34;</span>
+
+	<span class="nx">lab00v1alpha1</span> <span class="s">&#34;github.com/sample-domain/over-ez-operator/api/v1alpha1&#34;</span>
+<span class="p">)</span>
+
+<span class="c1">// MycrdReconciler reconciles a Mycrd object
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">MycrdReconciler</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">client</span><span class="p">.</span><span class="nx">Client</span>
+	<span class="nx">Log</span>    <span class="nx">logr</span><span class="p">.</span><span class="nx">Logger</span>
+	<span class="nx">Scheme</span> <span class="o">*</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">Scheme</span>
+<span class="p">}</span>
+
+<span class="c1">// +kubebuilder:rbac:groups=lab00.sample-domain.com,resources=mycrds,verbs=get;list;watch;create;update;patch;delete
+</span><span class="c1">// +kubebuilder:rbac:groups=lab00.sample-domain.com,resources=mycrds/status,verbs=get;update;patch
+</span><span class="c1"></span>
+<span class="c1">// --------------------
+</span><span class="c1">// ACT/RECONCILE STAGE : Perform all necessary actions to the make current resource state match
+</span><span class="c1">// the desired state. This is called reconciliation.
+</span><span class="c1">// --------------------
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">MycrdReconciler</span><span class="p">)</span> <span class="nf">Reconcile</span><span class="p">(</span><span class="nx">req</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">_</span> <span class="p">=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+	<span class="nx">_</span> <span class="p">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Log</span><span class="p">.</span><span class="nf">WithValues</span><span class="p">(</span><span class="s">&#34;mycrd&#34;</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">NamespacedName</span><span class="p">)</span>
+
+  <span class="c1">// TODO: Implement reconciliation controller logic
+</span><span class="c1"></span>  <span class="c1">// 
+</span><span class="c1"></span>  <span class="c1">// ADD RECONCILIATION LOGIC HERE
+</span><span class="c1"></span>  <span class="c1">//
+</span><span class="c1"></span>
+	<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="c1">// --------------------
+</span><span class="c1">// OBSERVE/WATCH STAGE: Observe the current state of the cluster. Add a watch to observe
+</span><span class="c1">// artifacts w/in the customer resource
+</span><span class="c1">// --------------------
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">MycrdReconciler</span><span class="p">)</span> <span class="nf">SetupWithManager</span><span class="p">(</span><span class="nx">mgr</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Manager</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nf">NewControllerManagedBy</span><span class="p">(</span><span class="nx">mgr</span><span class="p">).</span>
+    <span class="nf">For</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lab00v1alpha1</span><span class="p">.</span><span class="nx">Mycrd</span><span class="p">{}).</span>
+    
+    <span class="c1">// TODO: Watch for changes to secondary resources
+</span><span class="c1"></span>    <span class="c1">// 
+</span><span class="c1"></span>    <span class="c1">// ADD WATCHES HERE
+</span><span class="c1"></span>    <span class="c1">//
+</span><span class="c1"></span>
+		<span class="nf">Complete</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><div class="gdoc-page__anchorwrap"><h2 id="observewatch">Observe/Watch<a data-clipboard-text="http://localhost/golang/#observewatch" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Observe/Watch" href="#observewatch"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>In this phase, the controller observes the state of the cluster. Typically this is initiated by observing the events on the custom resource instance. These events are usually subscribed from the custom resource controller. Consider this to be similar in ways to a pub/sub mechanism between the resource controller and cluster.</p>
+<p>The execution of this stage occurs when we&rsquo;ve either created or updated a custom resource. Behind the scenes, the create/update operations are essentially the same operation since all kubernetes resources are idempotent.</p>
+<p>A simplified example definition of a resource might look like the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">operator.local/v1alpha1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">MyCRD</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w"> 
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-app</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></code></pre></div><p>When this resource is created, part of the resource creation process involves adding &ldquo;watches&rdquo; on the resource. A &ldquo;watch&rdquo; is essentially an observer, which observes the current state of the resource. They can be added in code w/in the resource controller (see code below and/or templated code above):</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// --------------------
+</span><span class="c1">// OBSERVE/WATCH STAGE: Observe the current state of the cluster. Add a watch to observe
+</span><span class="c1">// artifacts w/in the customer resource
+</span><span class="c1">// --------------------
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">MycrdReconciler</span><span class="p">)</span> <span class="nf">SetupWithManager</span><span class="p">(</span><span class="nx">mgr</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Manager</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nf">NewControllerManagedBy</span><span class="p">(</span><span class="nx">mgr</span><span class="p">).</span>
+    <span class="nf">For</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lab00v1alpha1</span><span class="p">.</span><span class="nx">Mycrd</span><span class="p">{}).</span>
+    
+    <span class="c1">// TODO: Watch for changes to secondary resources
+</span><span class="c1"></span>    <span class="c1">// 
+</span><span class="c1"></span>    <span class="c1">// ADD WATCHES HERE
+</span><span class="c1"></span>    <span class="c1">//
+</span><span class="c1"></span>
+		<span class="nf">Complete</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><p>We won&rsquo;t go into the specifics of filling out the template here. For now, we are only interested in illustrating &ldquo;where&rdquo; we add code, with a purpose, in our resource controller.</p>
+<div class="gdoc-page__anchorwrap"><h2 id="analyze">Analyze<a data-clipboard-text="http://localhost/golang/#analyze" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Analyze" href="#analyze"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>In this phase, the resource controller compares the current state of the resource instance to the desired state. The desired state is typically reflective of what is specified in the <code>spec</code> attributes of the resource.</p>
+<p>An example of a request like this would be if we wanted to change the <code>spec: size: 3</code> to <code>spec: size: 4</code> of the resource.</p>
+<p><img src="/assets/current-state-desired-state.png" alt=""></p>
+<div class="gdoc-page__anchorwrap"><h2 id="actreconcile">Act/Reconcile<a data-clipboard-text="http://localhost/golang/#actreconcile" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Act/Reconcile" href="#actreconcile"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>In this phase, the resource controller performs all necessary actions to make the current resource state match the desired state. This is called reconciliation, and is typically where operational knowledge is implemented (i.e. business/domain logic).</p>
+<p>Since the current state doesn&rsquo;t match the desired state, the resource controller must reconcile the state differences and make the desired state the new current state. This is done in the <code>Reconcile</code> function of the resource controller.</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// --------------------
+</span><span class="c1">// ACT/RECONCILE STAGE : Perform all necessary actions to the make current resource state match
+</span><span class="c1">// the desired state. This is called reconciliation.
+</span><span class="c1">// --------------------
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">MycrdReconciler</span><span class="p">)</span> <span class="nf">Reconcile</span><span class="p">(</span><span class="nx">req</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">_</span> <span class="p">=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+	<span class="nx">_</span> <span class="p">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Log</span><span class="p">.</span><span class="nf">WithValues</span><span class="p">(</span><span class="s">&#34;mycrd&#34;</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">NamespacedName</span><span class="p">)</span>
+
+  <span class="c1">// TODO: Implement reconciliation controller logic
+</span><span class="c1"></span>  <span class="c1">// 
+</span><span class="c1"></span>  <span class="c1">// ADD RECONCILIATION LOGIC HERE
+</span><span class="c1"></span>  <span class="c1">//
+</span><span class="c1"></span>
+	<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div>
 
     </article>
 

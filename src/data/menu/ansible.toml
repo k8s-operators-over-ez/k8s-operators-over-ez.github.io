@@ -2,3 +2,4 @@
     identifier = "ansible-ops"
     name = "Ansible Operators"
     weight = 0   
+    ref = "/ansible"

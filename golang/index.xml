@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang Operators on K8S Operators Over EZ</title>
+    <link>http://localhost/golang/</link>
+    <description>Recent content in Golang Operators on K8S Operators Over EZ</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="http://localhost/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Debugging Golang Operators</title>
+      <link>http://localhost/golang/debugging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/golang/debugging/</guid>
+      <description>Development Environments The following are prescribed options that you may choose to follow. There is no hard requirement to setup your environment as prescribed.
+Debugging GoLang Operators with Visual Studio Code  Open this code at the root of the lab code directory (docs/02/labs/000/code) with Visual Studio Code. Install necessary VS Code plugins/extensions for Go: https://github.com/golang/vscode-go#getting-started Follow directions for debugging: https://github.com/golang/vscode-go/blob/master/docs/debugging.md#set-up  To debug Unit tests:
+ Set break points Select the file suite_test.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,5 +1,5 @@
 ---
-title: A Golang Operator Lab - Over Easy
+title: Golang Operator Lab
 ---
 
 ## Overview

@@ -2,18 +2,16 @@
 <html lang="en">
 
 <head>
-	<meta name="generator" content="Hugo 0.75.1" />
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="Lab Requirements">
 
-<title> | K8S Operators Over EZ</title>
+<title>Lab Requirements | K8S Operators Over EZ</title>
 
 <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 <link rel="stylesheet" href="/main.min.css" media="screen">
 <link rel="stylesheet" href="/custom.css" media="screen">
 
-<link rel="alternate" type="application/rss+xml" href="http://localhost/index.xml" title="K8S Operators Over EZ" />
 <!--Made with Geekdoc theme https://github.com/xoxys/hugo-geekdoc-->
 
 </head>
@@ -230,7 +228,7 @@
             <span class="flex">
                 
                 <a href="/introduction/lab-requirements/"
-                    class="gdoc-nav__entry ">
+                    class="gdoc-nav__entry is-active">
                     Lab Requirements
                 </a>
             </span>
@@ -883,8 +881,9 @@
     </span>
 </div>
 
+
     <article class="gdoc-markdown">
-        <h1></h1>
+        <h1>Lab Requirements</h1>
         
 
 
@@ -892,16 +891,34 @@
     
 
 
-<h1 id="kubernetes-operators-done-over-easy">Kubernetes Operators Done Over-Easy</h1>
-<img src="/assets/overeasy.jpeg" width="450">
-<h1 id="how-to-contribute">How to Contribute</h1>
-<p>Did you want add something you didn&rsquo;t see here? (i.e. sample code, a lab write up, documentation additions, etc.)</p>
-<p>Did you find something that looked off?</p>
-<p>Here&rsquo;s what you can do:</p>
+<p>To run the labs and scripts in this guide, you will need the following:</p>
 <ul>
-<li>Create an issue in the repository</li>
-<li>Create pull-requests for review</li>
+<li>An accessible kubernetes cluster with sufficient privileges</li>
+<li><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a></li>
+<li><a href="https://github.com/ahmetb/kubectx">kubectx/kubens</a></li>
+<li><a href="https://sdk.operatorframework.io/docs/installation/install-operator-sdk/">operator-sdk &gt;= 1.0.0</a></li>
+<li><a href="https://kubernetes-sigs.github.io/kustomize/installation/">kustomize</a></li>
+<li><a href="https://golang.org/doc/install">golang</a></li>
+<li>make - build uitlity</li>
+<li>a shell environment (i.e. bash, zsh)</li>
+<li>a text editor</li>
 </ul>
+<p>Ensure that all of the above CLI executables are availabe in your <code>PATH</code> environment variable.</p>
+<h1 id="k8s-development-cluster-suggestions">K8S Development Cluster Suggestions</h1>
+<p>If you do not have access to a cluster, there are options to allow you to run a cluster locally:</p>
+<ul>
+<li><a href="https://github.com/kubernetes/minikube">minikube</a></li>
+<li><a href="https://github.com/kubernetes-sigs/kind">kind</a></li>
+<li><a href="https://k3d.io/">k3d</a></li>
+<li><a href="https://developers.redhat.com/blog/2019/09/05/red-hat-openshift-4-on-your-laptop-introducing-red-hat-codeready-containers/">openshift crc</a></li>
+<li><a href="https://www.docker.com/products/kubernetes">docker desktop</a></li>
+</ul>
+<!-- [Goto Previous Section](02-resources.md)
+
+[Goto Next Section](../02/01-golang-operators.md)
+
+[Return to Table of Contents](../../../../) --><blockquote>
+</blockquote>
 
 
     </article>

@@ -3,7 +3,6 @@ title = "K8S Operators Over EZ"
 theme = "hugo-geekdoc"
 publishDir = "../"
 
-
 # Geekdoc required configuration
 pygmentsUseClasses = true
 pygmentsCodeFences = true

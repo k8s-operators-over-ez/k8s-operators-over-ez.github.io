@@ -4,15 +4,14 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ansible Operators">
+<meta name="description" content="Scratch">
 
-<title>Ansible Operators | K8S Operators Over EZ</title>
+<title>Scratch | K8S Operators Over EZ</title>
 
 <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 <link rel="stylesheet" href="/main.min.css" media="screen">
 <link rel="stylesheet" href="/custom.css" media="screen">
 
-<link rel="alternate" type="application/rss+xml" href="http://localhost/ansible/index.xml" title="K8S Operators Over EZ" />
 <!--Made with Geekdoc theme https://github.com/xoxys/hugo-geekdoc-->
 
 </head>
@@ -751,7 +750,7 @@
             <span class="flex">
                 
                 <a href="/ansible/"
-                    class="gdoc-nav__entry is-active">
+                    class="gdoc-nav__entry ">
                     Ansible Operators
                 </a>
             </span>
@@ -882,8 +881,9 @@
     </span>
 </div>
 
+
     <article class="gdoc-markdown">
-        <h1>Ansible Operators</h1>
+        <h1>Scratch</h1>
         
 
 
@@ -891,38 +891,11 @@
     
 
 
-<div class="gdoc-page__anchorwrap"><h2 id="prerequisites">Prerequisites<a data-clipboard-text="http://localhost/ansible/#prerequisites" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Prerequisites" href="#prerequisites"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
-<ul>
-<li>Review the <a href="../introduction">introduction</a>, if you have not already</li>
-<li>Familiarity with Ansible.</li>
-</ul>
-<div class="gdoc-page__anchorwrap"><h2 id="agenda">Agenda<a data-clipboard-text="http://localhost/ansible/#agenda" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Agenda" href="#agenda"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
-<p>This section will cover the following:</p>
-<ul>
-<li>Review options for developing with Operators with Ansible</li>
-<li>Review the <a href="../01/01-introduction.md#how-do-operators-work">Reconciliation Cycle</a> with Ansible semantics</li>
-</ul>
-<p>Afterwards, you will take the plunge in a guided walkthrough.</p>
-<h1 id="ansible-operator-resources">Ansible Operator Resources</h1>
-<div class="gdoc-page__anchorwrap"><h2 id="development-libraries">Development Libraries<a data-clipboard-text="http://localhost/ansible/#development-libraries" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Development Libraries" href="#development-libraries"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
-<p>Checkout out the following resource for developing Operators with Ansible:</p>
-<ul>
-<li><a href="https://operatorframework.io/">Operator Framework</a></li>
-</ul>
-<blockquote class="gdoc-hint info">
-  In this section, as we discuss Ansible Operators, we will be referring to the <strong>Operator Framework</strong>, as we continue to discuss.
-</blockquote>
-
-<h1 id="the-reconciliation-cycle---revisited">The Reconciliation Cycle - Revisited</h1>
-<blockquote class="gdoc-hint info">
-  In the introduction, we presented the reconciliation cycle in a resource controller as followed:
-</blockquote>
-
-<p><img src="/assets/resource-controller-reconciliation-cycle.png" alt=""></p>
-<blockquote class="gdoc-hint info">
-  In this section, we will recap the Reconciliation Cycle in more detail with Ansible Operator specific embellishments to the Reconciliation Cycle, as shown below:
-</blockquote>
-
+<pre><code>$ mkdir ansible-operator-overeasy
+$ cd ansible-operator-overeasy
+$ operator-sdk init --plugins=ansible --domain mydomain.com
+</code></pre><pre><code>operator-sdk create api --group ansible-operators-over-ez --version v1alpha1 --kind AnsibleOpsOverEasy --generate-role
+</code></pre><p>![](&quot;/home/hershey/Pictures/Screenshot from 2020-11-04 13-14-18.png&quot;)</p>
 
 
     </article>

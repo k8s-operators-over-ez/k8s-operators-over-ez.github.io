@@ -8,6 +8,10 @@
   </url>
   
   <url>
+    <loc>http://localhost/ansible/scratch/</loc>
+  </url>
+  
+  <url>
     <loc>http://localhost/introduction/</loc>
     <priority>0</priority>
   </url>

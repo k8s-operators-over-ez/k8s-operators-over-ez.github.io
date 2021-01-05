@@ -1,0 +1,11 @@
+[[labnotes]]
+    identifier = "requirements"
+    name = "Requirements"
+    weight = 0   
+    ref = "/labnotes/lab-requirements.md"
+
+[[labnotes]]
+    identifier = "specifications"
+    name = "Specifications"
+    weight = 0   
+    ref = "/labnotes/specifications.md"

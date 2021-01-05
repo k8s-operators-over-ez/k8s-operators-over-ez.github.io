@@ -34,8 +34,3 @@
     name = "Resources"
     weight = 0
     ref = "/introduction/resources.md"   
-
-[[intro]]
-    name = "Lab Requirements"
-    weight = 0
-    ref = "/introduction/lab-requirements.md"   

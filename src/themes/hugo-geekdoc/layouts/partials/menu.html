@@ -9,6 +9,13 @@
     </section>
 
     <section class="gdoc-nav--main">
+        {{ if .Site.Data.menu.labnotes.labnotes }}
+            <h2>II. Lab Notes</h2>
+            {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.labnotes.labnotes) }}
+        {{ end }}
+    </section>
+
+    <section class="gdoc-nav--main">
         {{ if .Site.Data.menu.golang.golang }}
             <h2>II. Golang Operators</h2>
             {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.golang.golang) }}

@@ -21,9 +21,3 @@ If you do not have access to a cluster, there are options to allow you to run a 
 * [k3d](https://k3d.io/)
 * [openshift crc](https://developers.redhat.com/blog/2019/09/05/red-hat-openshift-4-on-your-laptop-introducing-red-hat-codeready-containers/)
 * [docker desktop](https://www.docker.com/products/kubernetes)
-
-<!-- [Goto Previous Section](02-resources.md)
-
-[Goto Next Section](../02/01-golang-operators.md)
-
-[Return to Table of Contents](../../../../) -->

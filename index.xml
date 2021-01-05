@@ -7,15 +7,6 @@
     <generator>Hugo -- gohugo.io</generator><atom:link href="http://localhost/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>http://localhost/ansible/scratch/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost/ansible/scratch/</guid>
-      <description>$ mkdir ansible-operator-overeasy $ cd ansible-operator-overeasy $ operator-sdk init --plugins=ansible --domain mydomain.com operator-sdk create api --group ansible-operators-over-ez --version v1alpha1 --kind AnsibleOpsOverEasy --generate-role ![](&amp;quot;/home/hershey/Pictures/Screenshot from 2020-11-04 13-14-18.png&amp;quot;)</description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>http://localhost/introduction/resources/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -58,6 +49,15 @@ Our strategy to reach the end state is detailed as followed:
     </item>
     
     <item>
+      <title>Ansible Operator Lab</title>
+      <link>http://localhost/ansible/lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/ansible/lab/</guid>
+      <description>Link to Lab: https://github.com/k8s-operators-over-ez/k8s-operators-over-ez.labs/tree/main/ansible-operator-labs/001</description>
+    </item>
+    
+    <item>
       <title>Debugging Golang Operators</title>
       <link>http://localhost/golang/debugging/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -66,6 +66,24 @@ Our strategy to reach the end state is detailed as followed:
       <description>Development Environments The following are prescribed options that you may choose to follow. There is no hard requirement to setup your environment as prescribed.
 Debugging GoLang Operators with Visual Studio Code  Open this code at the root of the lab code directory (docs/02/labs/000/code) with Visual Studio Code. Install necessary VS Code plugins/extensions for Go: https://github.com/golang/vscode-go#getting-started Follow directions for debugging: https://github.com/golang/vscode-go/blob/master/docs/debugging.md#set-up  To debug Unit tests:
  Set break points Select the file suite_test.</description>
+    </item>
+    
+    <item>
+      <title>Golang Operator Lab</title>
+      <link>http://localhost/golang/lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/golang/lab/</guid>
+      <description>Link to Lab: https://github.com/k8s-operators-over-ez/k8s-operators-over-ez.labs/tree/main/golang-operator-labs/001</description>
+    </item>
+    
+    <item>
+      <title>Helm Operator Lab</title>
+      <link>http://localhost/helm/lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/helm/lab/</guid>
+      <description>Link to Lab: https://github.com/k8s-operators-over-ez/k8s-operators-over-ez.labs/tree/main/helm-operator-labs/001</description>
     </item>
     
   </channel>

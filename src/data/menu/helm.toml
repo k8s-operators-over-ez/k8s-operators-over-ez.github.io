@@ -2,3 +2,10 @@
     identifier = "helm-ops"
     name = "Helm Operators"
     weight = 0   
+    ref = "/helm"
+
+[[helm]]
+    identifier = "helm-ops-lab"
+    name = "Lab"
+    weight = 0   
+    ref = "/helm/lab.md"

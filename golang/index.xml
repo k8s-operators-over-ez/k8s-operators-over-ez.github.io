@@ -16,5 +16,14 @@ Debugging GoLang Operators with Visual Studio Code  Open this code at the root o
  Set break points Select the file suite_test.</description>
     </item>
     
+    <item>
+      <title>Golang Operator Lab</title>
+      <link>http://localhost/golang/lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/golang/lab/</guid>
+      <description>Link to Lab: https://github.com/k8s-operators-over-ez/k8s-operators-over-ez.labs/tree/main/golang-operator-labs/001</description>
+    </item>
+    
   </channel>
 </rss>

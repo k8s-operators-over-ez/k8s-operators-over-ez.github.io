@@ -8,7 +8,8 @@
   </url>
   
   <url>
-    <loc>http://localhost/ansible/scratch/</loc>
+    <loc>http://localhost/helm/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -34,6 +35,10 @@
   </url>
   
   <url>
+    <loc>http://localhost/ansible/lab/</loc>
+  </url>
+  
+  <url>
     <loc>http://localhost/ansible/</loc>
   </url>
   
@@ -51,6 +56,10 @@
   
   <url>
     <loc>http://localhost/golang/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/helm/lab/</loc>
   </url>
   
   <url>

@@ -3,3 +3,9 @@
     name = "Ansible Operators"
     weight = 0   
     ref = "/ansible"
+
+[[ansible]]
+    identifier = "ansible-ops-lab"
+    name = "Lab"
+    weight = 0   
+    ref = "/ansible/lab.md"

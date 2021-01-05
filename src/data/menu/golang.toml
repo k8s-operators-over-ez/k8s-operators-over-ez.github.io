@@ -8,11 +8,11 @@
 
 [[golang]]
     identifier = "golang-ops-lab"
-    name = "Golang Operator Lab"
+    name = "Lab"
     weight = 0   
-    ref = "/golang/lab"
+    ref = "/golang/lab.md"
 
 [[golang]]
-    name = "Debugging Golang Operators"
+    name = "Debugging"
     weight = 0   
     ref = "/golang/debugging.md"

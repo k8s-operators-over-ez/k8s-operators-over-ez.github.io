@@ -16,10 +16,19 @@
     
     <item>
       <title></title>
-      <link>http://localhost/introduction/lab-requirements/</link>
+      <link>http://localhost/introduction/resources/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost/introduction/lab-requirements/</guid>
+      <guid>http://localhost/introduction/resources/</guid>
+      <description>Learn more about Operators  https://kubernetes.io/docs/concepts/extend-kubernetes/operator/ https://enterprisersproject.com/article/2019/2/kubernetes-operators-plain-english https://coreos.com/blog/introducing-operators.html https://www.openshift.com/blog/operator-framework-moves-to-cncf-for-incubation https://www.openshift.com/blog/kubernetes-operators-best-practices https://www.youtube.com/watch?v=8_DaCcRMp5I&amp;amp;t=3453s https://www.twitch.tv/videos/680494909  Frameworks to Help you Create Operators (Not an Exhaustive List)  https://sdk.operatorframework.io/build/ https://kudo.dev/ https://book.kubebuilder.io/ https://github.com/kubernetes-sigs/kubebuilder https://github.com/metacontroller/metacontroller https://github.com/zalando-incubator/kopf https://github.com/ContainerSolutions/java-operator-sdk    </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/labnotes/lab-requirements/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/labnotes/lab-requirements/</guid>
       <description>To run the labs and scripts in this guide, you will need the following:
  An accessible kubernetes cluster with sufficient privileges kubectl kubectx/kubens operator-sdk &amp;gt;= 1.0.0 kustomize golang make - build uitlity a shell environment (i.e. bash, zsh) a text editor  Ensure that all of the above CLI executables are availabe in your PATH environment variable.
 K8S Development Cluster Suggestions If you do not have access to a cluster, there are options to allow you to run a cluster locally:</description>
@@ -27,11 +36,25 @@ K8S Development Cluster Suggestions If you do not have access to a cluster, ther
     
     <item>
       <title></title>
-      <link>http://localhost/introduction/resources/</link>
+      <link>http://localhost/labnotes/specifications/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost/introduction/resources/</guid>
-      <description>Learn more about Operators  https://kubernetes.io/docs/concepts/extend-kubernetes/operator/ https://enterprisersproject.com/article/2019/2/kubernetes-operators-plain-english https://coreos.com/blog/introducing-operators.html https://www.openshift.com/blog/operator-framework-moves-to-cncf-for-incubation https://www.openshift.com/blog/kubernetes-operators-best-practices https://www.youtube.com/watch?v=8_DaCcRMp5I&amp;amp;t=3453s https://www.twitch.tv/videos/680494909  Frameworks to Help you Create Operators (Not an Exhaustive List)  https://sdk.operatorframework.io/build/ https://kudo.dev/ https://book.kubebuilder.io/ https://github.com/kubernetes-sigs/kubebuilder https://github.com/metacontroller/metacontroller https://github.com/zalando-incubator/kopf https://github.com/ContainerSolutions/java-operator-sdk    </description>
+      <guid>http://localhost/labnotes/specifications/</guid>
+      <description>Story - BDD/Gherkin TITLE: Overeasy Operator Requirements
+  DESCRIPTION
+ AS A: Developer I WANT: An Operator with a single busybox pod that logs a user specified message and shuts down after a user specified amount of time. If a duration or message are not specified, then both will be supplied by a REST API call. SO THAT: I can demonstrate the encapsulation of operational knowlege, leveraging the Operator Design Pattern.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/labnotes/strategy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/labnotes/strategy/</guid>
+      <description>Execution Strategy (Optional Reading) In a nutshell, we want our operator to start up a pod, running a busybox image for a specific duration and logging a user specific message, and then setting our Operator&amp;rsquo;s status.
+We&amp;rsquo;ll want our Operator to provision our busybox pod with the necessary attribute specifications, eventually.
+Our strategy to reach the end state is detailed as followed:
+  I - Prototyping - Create a YAML specification for a pod which runs for a specified amount of time and logs a specific message.</description>
     </item>
     
     <item>

@@ -7,17 +7,6 @@
     <generator>Hugo -- gohugo.io</generator><atom:link href="http://localhost/introduction/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>http://localhost/introduction/lab-requirements/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost/introduction/lab-requirements/</guid>
-      <description>To run the labs and scripts in this guide, you will need the following:
- An accessible kubernetes cluster with sufficient privileges kubectl kubectx/kubens operator-sdk &amp;gt;= 1.0.0 kustomize golang make - build uitlity a shell environment (i.e. bash, zsh) a text editor  Ensure that all of the above CLI executables are availabe in your PATH environment variable.
-K8S Development Cluster Suggestions If you do not have access to a cluster, there are options to allow you to run a cluster locally:</description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>http://localhost/introduction/resources/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

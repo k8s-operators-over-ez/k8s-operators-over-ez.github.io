@@ -6,97 +6,11 @@
     weight = 0   
     ref = "/golang"
 
-[[golang.sub]]
-    identifier = "golang-ops-res"
-    parent = "golang-ops"
-    name = "Golang Operator Resources"
-    weight = 0  
-    ref = "/golang/#golang-operator-resources"
-
-[[golang.sub.sub]]
-    parent = "golang-ops-res"
-    name = "Development Libraries"
-    weight = 0  
-    ref = "/golang/#development-libraries"
-
-[[golang.sub.sub]]
-    parent = "golang-ops-res"
-    name = "Useful Golang API References"
-    weight = 0  
-    ref = "/golang/#useful-golang-api-references"
-
-[[golang.sub]]
-    parent = "golang-ops"
-    name = "The Reconciliation Cycle - Revisited"
-    weight = 0  
-    ref = "/golang/#the-reconciliation-cycle---revisited"
-
 [[golang]]
     identifier = "golang-ops-lab"
     name = "Golang Operator Lab"
     weight = 0   
     ref = "/golang/lab"
-
-[[golang.sub]]
-    parent = "golang-ops-lab"
-    name = "Environment Setup"
-    weight = 0  
-    ref = "/golang/lab/#environment-setup"
-
-[[golang.sub]]
-    parent = "golang-ops-lab"
-    name = "Lab Specifications"
-    weight = 0  
-    ref = "/golang/lab/#lab-specifications"
-
-[[golang.sub]]
-    identifier = "exec-strategy"
-    parent = "golang-ops-lab"
-    name = "Execution Strategy"
-    weight = 0  
-    ref = "/golang/lab/#execution-strategy"
-
-[[golang.sub.sub]]
-    parent = "exec-strategy"
-    name = "I. Prototyping"
-    weight = 0  
-    ref = "/golang/lab/#i-prototyping"
-
-[[golang.sub.sub]]
-    parent = "exec-strategy"
-    name = "II. Operating Scaffolding"
-    weight = 0  
-    ref = "/golang/lab/#ii-operator-scaffolding"
-
-[[golang.sub.sub]]
-    parent = "exec-strategy"
-    name = "III. CR Definition Implementation"
-    weight = 0  
-    ref = "/golang/lab/#iii-cr-definition-implementation"
-
-[[golang.sub.sub]]
-    parent = "exec-strategy"
-    name = "IV. TDD Setup (Test Driven Design)"
-    weight = 0  
-    ref = "/golang/lab/#iv-tdd-setup"
-
-[[golang.sub.sub]]
-    parent = "exec-strategy"
-    name = "V. CR Controller Implementation"
-    weight = 0  
-    ref = "/golang/lab/#v-cr-controller-implementation"
-
-[[golang.sub.sub]]
-    parent = "exec-strategy"
-    name = "VI. Test Validation"
-    weight = 0  
-    ref = "/golang/lab/#vi-test-validation"
-
-[[golang.sub.sub]]
-    parent = "exec-strategy"
-    name = "VII. Deployment"
-    weight = 0  
-    ref = "/golang/lab/#vii-deployment"
 
 [[golang]]
     name = "Debugging Golang Operators"

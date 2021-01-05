@@ -9,3 +9,9 @@
     name = "Specifications"
     weight = 0   
     ref = "/labnotes/specifications.md"
+
+[[labnotes]]
+    identifier = "strategy"
+    name = "Strategy (Optional)"
+    weight = 0   
+    ref = "/labnotes/strategy.md"

@@ -4,15 +4,14 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Introduction">
+<meta name="description" content="Lab Requirements">
 
-<title>Introduction | K8S Operators Over EZ</title>
+<title>Lab Requirements | K8S Operators Over EZ</title>
 
 <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 <link rel="stylesheet" href="/main.min.css" media="screen">
 <link rel="stylesheet" href="/custom.css" media="screen">
 
-<link rel="alternate" type="application/rss+xml" href="http://localhost/introduction/index.xml" title="K8S Operators Over EZ" />
 <!--Made with Geekdoc theme https://github.com/xoxys/hugo-geekdoc-->
 
 </head>
@@ -70,7 +69,7 @@
             <span class="flex">
                 
                 <a href="/introduction/"
-                    class="gdoc-nav__entry is-active">
+                    class="gdoc-nav__entry ">
                     Introduction
                 </a>
             </span>
@@ -247,7 +246,7 @@
             <span class="flex">
                 
                 <a href="/labnotes/lab-requirements/"
-                    class="gdoc-nav__entry ">
+                    class="gdoc-nav__entry is-active">
                     Requirements
                 </a>
             </span>
@@ -564,8 +563,9 @@
     </span>
 </div>
 
+
     <article class="gdoc-markdown">
-        <h1>Introduction</h1>
+        <h1>Lab Requirements</h1>
         
 
 
@@ -573,115 +573,28 @@
     
 
 
-<p>This guide serves all but one purpose:</p>
-<p><strong>To help assist people like you understand what Kubernetes Operators are and how to write them to do &ldquo;stuff&rdquo;</strong></p>
-<div class="gdoc-page__anchorwrap"><h2 id="prerequisites">Prerequisites<a data-clipboard-text="http://localhost/introduction/#prerequisites" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Prerequisites" href="#prerequisites"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
-<p>You should have:</p>
+<p>To run the labs and scripts in this guide, you will need the following:</p>
 <ul>
-<li>Basic working knowledge of what containers and tools like, Docker, are.</li>
-<li>Basic working knowledge of creating and deploying resources in Kubernetes.</li>
-<li>Basic working knowledge of the <code>kubectl</code> CLI utility</li>
-<li>Development experience across one or more projects (&hellip;as a coder). The more, the merrier.</li>
+<li>An accessible kubernetes cluster with sufficient privileges</li>
+<li><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a></li>
+<li><a href="https://github.com/ahmetb/kubectx">kubectx/kubens</a></li>
+<li><a href="https://sdk.operatorframework.io/docs/installation/install-operator-sdk/">operator-sdk &gt;= 1.0.0</a></li>
+<li><a href="https://kubernetes-sigs.github.io/kustomize/installation/">kustomize</a></li>
+<li><a href="https://golang.org/doc/install">golang</a></li>
+<li>make - build uitlity</li>
+<li>a shell environment (i.e. bash, zsh)</li>
+<li>a text editor</li>
 </ul>
-<p>You will be best served from this material, if you come in with any of the following training (though not required):</p>
+<p>Ensure that all of the above CLI executables are availabe in your <code>PATH</code> environment variable.</p>
+<h1 id="k8s-development-cluster-suggestions">K8S Development Cluster Suggestions</h1>
+<p>If you do not have access to a cluster, there are options to allow you to run a cluster locally:</p>
 <ul>
-<li>CKAD/CKA certification or similar training</li>
-<li>Kubernetes courses (i.e. Coursera, Udemy, KodeKloud, etc. etc.)</li>
+<li><a href="https://github.com/kubernetes/minikube">minikube</a></li>
+<li><a href="https://github.com/kubernetes-sigs/kind">kind</a></li>
+<li><a href="https://k3d.io/">k3d</a></li>
+<li><a href="https://developers.redhat.com/blog/2019/09/05/red-hat-openshift-4-on-your-laptop-introducing-red-hat-codeready-containers/">openshift crc</a></li>
+<li><a href="https://www.docker.com/products/kubernetes">docker desktop</a></li>
 </ul>
-<div class="gdoc-page__anchorwrap"><h2 id="the-problem">The Problem<a data-clipboard-text="http://localhost/introduction/#the-problem" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor The Problem" href="#the-problem"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
-<p>To better understand the &ldquo;What&rdquo; and the &ldquo;How&rdquo; about Kubernetes Operators, we need to understand the problem(s) that motivated the need for Kubenertes Operators.</p>
-<p>Kubernetes is notorious in it&rsquo;s ability to integrate and facilitate declarative configuration and automation. This was out-of-the-box manageable for most stateless applications.</p>
-<p>However, for stateful applications this was a bit problematic. How do you manage and persist the state of your application and it&rsquo;s dependencies? How do you keep the rest of your application going when you add/remove dependencies? Of course, much of this management was done manually and/or required additional personnel resources to help manage (i.e. DevOps) and in general, required more of your attention.</p>
-<p>Much of these pains, boiled down to one ultimate question at hand:</p>
-<p><strong>How do you effectively automate Stateful Applications on Kubernetes?</strong></p>
-<p>That answer came in the form of what we call&hellip;</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">░█████╗░██████╗░███████╗██████╗░░█████╗░████████╗░█████╗░██████╗░░██████╗
-██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗██╔════╝
-██║░░██║██████╔╝█████╗░░██████╔╝███████║░░░██║░░░██║░░██║██████╔╝╚█████╗░
-██║░░██║██╔═══╝░██╔══╝░░██╔══██╗██╔══██║░░░██║░░░██║░░██║██╔══██╗░╚═══██╗
-╚█████╔╝██║░░░░░███████╗██║░░██║██║░░██║░░░██║░░░╚█████╔╝██║░░██║██████╔╝
-░╚════╝░╚═╝░░░░░╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░░╚════╝░╚═╝░░╚═╝╚═════╝░
-</code></pre></div><div class="gdoc-page__anchorwrap"><h2 id="whats-an-operator">What&rsquo;s an Operator?<a data-clipboard-text="http://localhost/introduction/#whats-an-operator" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor What&rsquo;s an Operator?" href="#whats-an-operator"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
-<p>&ldquo;An operator is a Kubernetes controller that understands 2 domains: Kubernetes and something else. By combining knowledge of both domains, it can automate tasks that usually require a human operator that understands both domains.&rdquo;
--Jimmy Zelinskie - <a href="https://bit.ly/3iS6AFx">https://bit.ly/3iS6AFx</a></p>
-<p>An operator allows you to encapsulate kubernetes application resources (i.e. pods, deployments, daemonsets, statefulsets, jobs, services, configmaps, etc), by creating a <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">CRD (Custom Resource Definition)</a> and a Kubernetes <a href="https://kubernetes.io/docs/concepts/architecture/controller/">Controller</a>. It manages the state of your application resources and drives deployment and domain specific operations (operational knowledge) of your CRD deployment instance(s).</p>
-<p>Operator = Resource + Controller + Domain Specific Operations</p>
-<div class="gdoc-page__anchorwrap"><h3 id="kubernetes-resources--controllers">Kubernetes: Resources + Controllers<a data-clipboard-text="http://localhost/introduction/#kubernetes-resources--controllers" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Kubernetes: Resources + Controllers" href="#kubernetes-resources--controllers"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
-<!-- ![](/assets/k8s-resources-and-controllers.png) -->
-<p><a href="/assets/k8s-resources-and-controllers.png"><img src="/assets/k8s-resources-and-controllers.png" alt=""></a></p>
-<p>In Kubernetes, for simplicity&rsquo;s sake, the basic building blocks that we use to orchestrate our containers can be categorized into either &ldquo;resources&rdquo; and &ldquo;controllers&rdquo;</p>
-<p>Resources can be composed of things like Nodes, Pods, ConfigMaps, and Services to name a few. Controllers can be composed of things like Deployments, ReplicaSets, and DaemonSetsIf you&rsquo;ve worked with Kubernetes, then you may already be familiar with some of the constructs that we&rsquo;re looking at.</p>
-<p>You are not Limited to the readily available resources and controller types offered by Kubernetes. That’s because Kubernetes is a platform. It was made to be expanded upon. And when you treat it like a platform, you can do some pretty amazing things.</p>
-<p>You can create your own Resources and Controllers to communicate and extend the Kubernetes orchestration platform. It&rsquo;s supported by rich APIs and libraries written in Golang. Consequently, you can leverage those same libraries and APIs to aid you in the creation of your own Custom Resources and Controllers.</p>
-<p>By being able to leverage existing resources and creating your own resources and controllers, you can orchestrate and automate your workloads in anyway possible that you can imagine. It&rsquo;s not a static platform. And so therefore, you&rsquo;re not boxed into a default set of resources and controllers.</p>
-<div class="gdoc-page__anchorwrap"><h3 id="domain-specific-knowledgeoperations">Domain Specific Knowledge/Operations<a data-clipboard-text="http://localhost/introduction/#domain-specific-knowledgeoperations" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Domain Specific Knowledge/Operations" href="#domain-specific-knowledgeoperations"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
-<p>Domain or Application specific knowledge is another crucial piece w/in the Operator Pattern. It is generally part of your business logic. This knowledge ties in heavily to a Custom Resource Controller. The reason for this, is because all of the operational knowledge that you want to codify and automate, gets put into the controller! The Custom Resource itself, merely provides useful information that the Resource controller can leverage, in the form of custom resource specification and status attributes.</p>
-<p>Examples of Domain Specific Tasks and Operations may include, but not limited too</p>
-<ul>
-<li>Configuration requirements</li>
-<li>Installation requirements</li>
-<li>Logging/Security requirements</li>
-<li>HA/Scaling requirements</li>
-<li>Application start-up and shutdown routines</li>
-<li>Process and workflow triggers</li>
-<li>Application Deployment</li>
-<li>Etc.</li>
-</ul>
-<p>This isn’t an exhaustive list, by any means,  The possibilities, however, of what you can accomplish are quite limitless.</p>
-<p>Regardless of what the operation is, what business requirements or needs you must fullfill, all of these things must be coded w/in a Customer Resource controller.</p>
-<div class="gdoc-page__anchorwrap"><h3 id="conventional-versus-operator-based-deployments">Conventional versus Operator based Deployments<a data-clipboard-text="http://localhost/introduction/#conventional-versus-operator-based-deployments" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Conventional versus Operator based Deployments" href="#conventional-versus-operator-based-deployments"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h3></div>
-<p>The advantages of an operator can be seen when you start thinking about how you manage your applications deployed into a Kubernetes cluster. Typically, you manage the deployment of each individual resource which usually composes the entirety of the application you deploy.</p>
-<p>With operators, these resources are packaged up, and generally expose domain specific attributes (i.e. specifications ) for your deployment from a single point of configuration &ndash; your &ldquo;Operator&rdquo; instance.</p>
-<p><img src="/assets/conventional-vs-operators.png" alt=""></p>
-<p>In the illustration above, the real work to allocate and configure the service, deployment, and configmap, does not dissappear, when building an operator. They are managed by your custom resource&rsquo;s controller. You must specify the resource artifacts and the details of those artifacts you want w/in your operator&rsquo;s CRD instance. You are responsible for the resources you want in your operator.</p>
-<p>You see the immediate benefits of an operator, when you begin configuring and deploying instances of your operator instead of deployments for various resources of a convential deployment. Notice, how much simpler and less error proned the operator configuration is in comparison to a conventional deployment.</p>
-<p>An operator based deployment in this regards, buys consistency, by offering you a way to templatize your conventional deployment as well as allow you to develop domain specific operations ( or operational knowledge) into your operator via a controller implementation. Essentially, you create what the community calls a Kubernetes Application.</p>
-<div class="gdoc-page__anchorwrap"><h2 id="how-do-operators-work">How do Operators Work?<a data-clipboard-text="http://localhost/introduction/#how-do-operators-work" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor How do Operators Work?" href="#how-do-operators-work"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
-<p><img src="/assets/operator-crd-crcontroller.png" alt=""></p>
-<p>From a high level, an operator is composed of the following components:</p>
-<ul>
-<li>A Custom Resource</li>
-<li>A Resource Controller</li>
-<li>And w/in the Resource Controller, codified Domain Specific knowledge.</li>
-</ul>
-<p>A Custom Resource (CRD) <strong>allows you to extend the Kubernetes API</strong></p>
-<p>The relationship between the two: <strong>A Custom Resource (CRD) needs a Controller to act upon it&rsquo;s presence (i.e. CRD instance)</strong></p>
-<p>Without a controller for your custom resource, then it’s just a stateless object w/in Kubernetes.</p>
-<p>So then, How does a controller work? What does it do? What’s inside of a controller?</p>
-<p><img src="/assets/resource-controller-reconciliation-cycle-full-example.png" alt=""></p>
-<p>In a nutshell, the Resource Controller ensures that the current state of a resource matches the desired state of a resource.</p>
-<p>An example of this is if we specified the number of pods of a resource through an arbitrary specification/attribute, <code>size</code>, on the custom resource instance. If we increase/decrease the value, then we are setting the desired state.</p>
-<p>The following idempotent cycle takes place when a resource change event occurs.</p>
-<ul>
-<li>
-<p><strong>Observe/Watch</strong>: In this phase, the controller observes the state of th cluster. Typically this is initiated by observing the events on the custom resource instance. These events are usually subscribed from the custom resource controller. Consider this to be similar in ways to a pub/sub mechanism between the resource controller and cluster.</p>
-</li>
-<li>
-<p><strong>Analyze</strong>: In this phase, the resource controller compares the current state of the resource instance to the desired state. The desired state is typically reflective of what is specified in the <code>spec</code> attributes of the resource.</p>
-</li>
-<li>
-<p><strong>Act/Reconcile</strong>: In this phase, the resource controller performs all necessary actions to make the current resource state match the desired state. This is called reconciliation, and is typically where operational knowledge is implemented (i.e. business/domain logic).</p>
-</li>
-</ul>
-<p>The reconciliation cycle generally runs until the desired state is achieved or until an error is thrown. It is not uncommon to see the reconciliation cycle run repeatedly as it treats each run as an itempotent process.</p>
-<div class="gdoc-page__anchorwrap"><h2 id="types-of-operators">Types of Operators<a data-clipboard-text="http://localhost/introduction/#types-of-operators" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Types of Operators" href="#types-of-operators"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
-<p>With regards to the Operator Framework, the following Operator Types are supported:</p>
-<ul>
-<li>Golang Operators</li>
-<li>Helm Operators</li>
-<li>Ansible Operators</li>
-</ul>
-<p>But wait, there&rsquo;s more! Outside of the Operator Framework:</p>
-<ul>
-<li>Java Operators</li>
-<li>Python Operators</li>
-<li>Javascript/Typescript Operators</li>
-<li>JSONNET Operators</li>
-</ul>
-<!-- [Goto Next Section](02-resources.md)
-
-[Return to Table of Contents](../../../../) --><blockquote>
-</blockquote>
 
 
     </article>

@@ -17,13 +17,20 @@
   </url>
   
   <url>
-    <loc>http://localhost/introduction/lab-requirements/</loc>
+    <loc>http://localhost/introduction/resources/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost/introduction/resources/</loc>
-    <priority>0</priority>
+    <loc>http://localhost/labnotes/lab-requirements/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/labnotes/specifications/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/labnotes/strategy/</loc>
   </url>
   
   <url>
@@ -44,6 +51,10 @@
   
   <url>
     <loc>http://localhost/golang/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/labnotes/</loc>
   </url>
   
   <url>

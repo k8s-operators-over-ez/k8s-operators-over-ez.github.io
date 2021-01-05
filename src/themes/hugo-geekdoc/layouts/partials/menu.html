@@ -17,28 +17,28 @@
 
     <section class="gdoc-nav--main">
         {{ if .Site.Data.menu.golang.golang }}
-            <h2>II. Golang Operators</h2>
+            <h2>III. Golang Operators</h2>
             {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.golang.golang) }}
         {{ end }}
     </section>
 
     <section class="gdoc-nav--main">
         {{ if .Site.Data.menu.ansible.ansible }}
-            <h2>III. Ansible Operators</h2>
+            <h2>IV. Ansible Operators</h2>
             {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.ansible.ansible) }}
         {{ end }}
     </section>
 
     <section class="gdoc-nav--main">
         {{ if .Site.Data.menu.helm.helm }}
-            <h2>IV. Helm Operators</h2>
+            <h2>V. Helm Operators</h2>
             {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.helm.helm) }}
         {{ end }}
     </section>
 
     <section class="gdoc-nav--main">
         {{ if .Site.Data.menu.alt.alt }}
-            <h2>V. Alternative Operators</h2>
+            <h2>VI. Alternative Operators</h2>
             {{ partial "menu-bundle" (dict "current" . "source" .Site.Data.menu.alt.alt) }}
         {{ end }}
     </section>

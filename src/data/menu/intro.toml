@@ -30,7 +30,7 @@
     weight = 0
     ref = "/introduction/#types-of-operators"  
 
-[[intro]]
+[[intro.sub]]
     name = "Resources"
     weight = 0
     ref = "/introduction/resources.md"   

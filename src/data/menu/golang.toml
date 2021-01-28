@@ -12,7 +12,7 @@
     weight = 0   
     ref = "/golang/lab.md"
 
-[[golang]]
-    name = "Debugging"
-    weight = 0   
-    ref = "/golang/debugging.md"
+# [[golang]]
+#     name = "Debugging"
+#     weight = 0   
+#     ref = "/golang/debugging.md"

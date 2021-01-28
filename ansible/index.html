@@ -649,6 +649,7 @@
 <p>Checkout out the following resource for developing Operators with Ansible:</p>
 <ul>
 <li><a href="https://operatorframework.io/">Operator Framework</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/index.html">Ansible Documentation</a></li>
 </ul>
 <blockquote class="gdoc-hint info">
   In this section, as we discuss Ansible Operators, we will be referring to the <strong>Operator Framework</strong>, as we continue to discuss.
@@ -664,7 +665,61 @@
   In this section, we will recap the Reconciliation Cycle in more detail with Ansible Operator specific embellishments to the Reconciliation Cycle, as shown below:
 </blockquote>
 
-
+<p><img src="/assets/resource-controller-reconciliation-cycle-ansible-operators.png" alt=""></p>
+<p>Each state in the Reconciliation Cycle, correspond to particular points of interest in our Ansible Operator&rsquo;s scaffolding.</p>
+<p><strong>Resource Controller</strong>: Since our Operator includes an Ansible Role as part of it&rsquo;s scaffolding, the Kubernetes Resource Controller equivalent, is represented by the tasks defined in our Ansible Role. These tasks are generally located at: <code>roles/operator-name/tasks/main.yml</code></p>
+<p><strong>Resource Watching</strong>: Our scaffolded Operator also includes a way to observe resources, through a watch file. This file is located at the root of the scaffolded project, <code>watches.yaml</code>. More information on watches <a href="https://sdk.operatorframework.io/docs/building-operators/ansible/reference/watches/">here</a></p>
+<div class="gdoc-page__anchorwrap"><h2 id="observewatch">Observe/Watch<a data-clipboard-text="http://localhost/ansible/#observewatch" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Observe/Watch" href="#observewatch"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>In this phase, the resource controller (Ansible Role) observes the state of the cluster. Typically this is initiated by leveraging a <code>watches.yaml</code> file and adding to it resources that should be observed for changes.</p>
+<p>The execution of this stage occurs when we&rsquo;ve either created or updated a custom resource. Behind the scenes, the create/update operations are essentially the same operation since all kubernetes resources are idempotent.</p>
+<p>A simplified example definition of a resource might look like the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">operator.local/v1alpha1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">MyCRD</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w"> 
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-app</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></code></pre></div><p>When this resource is created, part of the resource creation process involves adding &ldquo;watches&rdquo; on the resource. A &ldquo;watch&rdquo; is essentially an observer, which observes the current state of the resource. For example, they can be added in the <code>watches.yaml</code> file as illustrated:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
+</span><span class="w"></span><span class="c"># Use the &#39;create api&#39; subcommand to add watches to this file.</span><span class="w">
+</span><span class="w"></span>- <span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l">v1alpha1</span><span class="w">
+</span><span class="w">  </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">myoperator.mydomain.com</span><span class="w">
+</span><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">MyCRD</span><span class="w">
+</span><span class="w">  </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">mycrd</span><span class="w">
+</span><span class="w"></span><span class="c"># +kubebuilder:scaffold:watch</span><span class="w">
+</span></code></pre></div><div class="gdoc-page__anchorwrap"><h2 id="analyze">Analyze<a data-clipboard-text="http://localhost/ansible/#analyze" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Analyze" href="#analyze"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>In this phase, the resource controller (Ansible Role) compares the current state of the resource instance to the desired state. The desired state is typically reflective of what is specified in the <code>spec</code> attributes of the resource.</p>
+<p>An example of a request like this would be if we wanted to change the <code>spec: size: 3</code> to <code>spec: size: 4</code> of the resource.</p>
+<p><img src="/assets/current-state-desired-state.png" alt=""></p>
+<div class="gdoc-page__anchorwrap"><h2 id="actreconcile">Act/Reconcile<a data-clipboard-text="http://localhost/ansible/#actreconcile" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Act/Reconcile" href="#actreconcile"><svg class="icon link"><use xlink:href="#link"></use></svg></a></h2></div>
+<p>In this phase, the resource controller (Ansible Role) performs all necessary actions to make the current resource state match the desired state. This is called reconciliation, and is typically where operational knowledge is implemented (i.e. business/domain logic).</p>
+<p>Since the current state doesn&rsquo;t match the desired state, the resource controller must reconcile the state differences and make the desired state the new current state. This is done in the <code>roles/operator-name/tasks/main.yml</code> file of the Ansible Roles tasks.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># Example Ansible Tasks for an Ansible Role</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">set up operator reconciliation environment</span><span class="w">
+</span><span class="w">  </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> 
+</span><span class="w">    </span><span class="nt">ansible_operator_meta</span><span class="p">:</span><span class="w"> 
+</span><span class="w">      </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">ansible-operator-overeasy-system</span><span class="w">
+</span><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">ansible_operator_meta.namespace is undefined</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">call api for response (if message and/or timeout is not defined)</span><span class="w">
+</span><span class="w">  </span><span class="nt">shell</span><span class="p">:</span><span class="w">  </span><span class="s1">&#39;curl -sb -H &#34;Accept: application/json&#34; &#34;http://my-json-server.typicode.com/keunlee/test-rest-repo/golang-lab00-response&#34;&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">response_fact</span><span class="w">
+</span><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">(message is undefined) or (timeout is undefined)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">get response</span><span class="w">
+</span><span class="w">  </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> 
+</span><span class="w">    </span><span class="nt">response</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{response_fact.stdout}}&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">(message is undefined) or (timeout is undefined)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">set operator specifications on valid response</span><span class="w">
+</span><span class="w">  </span><span class="nt">set_fact</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{response.message}}&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{response.timeout}}&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">response is defined</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w">
+</span></code></pre></div>
 
     </article>
 

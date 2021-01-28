@@ -1,5 +1,7 @@
 ## Story - BDD/Gherkin
 
+![](/assets/specifications-flow-requirements.png)
+
 **TITLE**: Overeasy Operator Requirements
 
 - **DESCRIPTION**

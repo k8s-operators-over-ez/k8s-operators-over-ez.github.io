@@ -15,3 +15,9 @@
     name = "Strategy (Optional)"
     weight = 0   
     ref = "/labnotes/strategy.md"
+
+[[labnotes]]
+    identifier = "debugging"
+    name = "Debugging Operators (Optional)"
+    weight = 0   
+    ref = "/labnotes/debugging.md"

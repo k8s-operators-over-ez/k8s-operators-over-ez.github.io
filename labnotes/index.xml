@@ -7,6 +7,17 @@
     <generator>Hugo -- gohugo.io</generator><atom:link href="http://localhost/labnotes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
+      <link>http://localhost/labnotes/debugging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/labnotes/debugging/</guid>
+      <description>Development Environments The following are prescribed options that you may choose to follow, for assisting you with your developments.
+Debugging GoLang Operators with Visual Studio Code  Open this code at the root of the lab code directory with Visual Studio Code. Install necessary VS Code plugins/extensions for Go: https://github.com/golang/vscode-go#getting-started Follow directions for debugging: https://github.com/golang/vscode-go/blob/master/docs/debugging.md#set-up  To debug Unit tests:
+ Set break points Select the file suite_test.go as your &amp;ldquo;Run and Debug&amp;rdquo; starting point  To debug an operator instance:</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>http://localhost/labnotes/lab-requirements/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
